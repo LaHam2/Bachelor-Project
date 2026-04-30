@@ -1,0 +1,8 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Minimax optimal testing by classification for Gaussian models}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Setting of the problem}{2}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}The Sobolev ellipsoid and Gaussian sequence model}{3}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Preliminary results }{3}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Optimal transport based methods in Goodness-of-Fit problems}{5}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Appendix}{6}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{7}{chapter.5}%

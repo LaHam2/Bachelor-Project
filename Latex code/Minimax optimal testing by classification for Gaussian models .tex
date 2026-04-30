@@ -47,7 +47,7 @@ In this project, we will restrict ourselves to a very specific class of distribu
 \end{definition}
 \textbf{ADD MORE DETAILS ABOUT THE INTUITION BEHIND GAUSSIAN SEQUENCE MODEL}
 
-\section{Preliminary results :} 
+\section{Preliminary results } 
 The hard part of this kind of frameworks consists in finiding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
 \begin{definition}
     Let $S \subseteq \mx$ be a measurable set, and $\mu,\nu$ be two probability measures on $\mx$. We define the separation and size of $S$ respectively as follows : 
@@ -59,11 +59,11 @@ The hard part of this kind of frameworks consists in finiding a good separating 
 \begin{lemma}\label{lem:lemma1}\citet[Lemma~1]{gerberclas}\\
     Consider the hypothesis testing problem $\H_0 : p = q$ versus any other alternative $\H_1$. Suppose that the learner has constructed a separating set $S$ such that : 
     \begin{equation*}
-        \forall \mu,\nu \in \H_1 : \left|\sep(S)\right| = \left|\mu(S)-\nu(S)\right| \geq \underbar{sep} \ \text{ and }\ \forall\mu,\nu \in \H_0 \cup \H_1 : \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c)) \leq \bar{\tau}
+        \forall \mu,\nu \in \H_1 : \left|\sep(S)\right| = \left|\mu(S)-\nu(S)\right| \geq \underbar{$sep$} \ \text{ and }\ \forall\mu,\nu \in \H_0 \cup \H_1 : \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c)) \leq \bar{\tau}
     \end{equation*}
     Then, using only the knowledge of $\bar{\tau}$, the classifier-accuracy test with samples of size $n$ from both $p$ and $q$ and an appropriate threshold achieves type-I and type-II errors at most $\delta$ provided that : 
     \begin{equation*}
-        n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{sep}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{sep}}\Bigr)
+        n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$sep$}}\Bigr)
     \end{equation*}
     for a large enough constant $c >0$
 \end{lemma}
@@ -85,5 +85,11 @@ Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,
     \begin{equation*}
         \Bigg| \frac{1}{n} \sum_{i=1}^{n} \ind{X_i \in S}-\ind{Y_i \in S} \Bigg| \leq \sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}
     \end{equation*}
-    and reject the null hypothesis otherwise. Above, $c>0$ is a large absolut constant, and note that the threshold only relies on the knowledge of $\bar{\tau},n$ and $\delta$
+    and reject the null hypothesis otherwise. Above, $c>0$ is a large absolut constant, and note that the threshold only relies on the knowledge of $\bar{\tau},n$ and $\delta$\\
+    To analyse type-I and type-II errors , first, assume that $\H_0$ holds. Since $\sep(S) = 0$ under the latter hypothesis, the second statement of \Cref{lem:lemma2} implies that we accept $\H_0$ with probability at least $1-\frac{/delta}{2}$ if $c$ is large enough.
+    Moreover, if $\H_1$ holds, with probability at least $1-\frac{\delta}{2}$, the first statement of \Cref{lem:lemma2} implies that : 
+    \begin{equation*}
+        \Bigg| \frac{1}{n}\sum_{i=1}^{n} \ind{X_i \in S} -\ind{Y_i \in S} \Bigg| \geq \left| \underbar{$sep$} \right| + \Bigl(\sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}\Bigr)
+     \end{equation*}
+     By the assumed lower bound $n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$sep$}}\Bigr)$, we will reject $\H_0$ as desired.
 \end{proof}
