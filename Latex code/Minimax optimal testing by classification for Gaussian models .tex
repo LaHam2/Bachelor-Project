@@ -1,0 +1,89 @@
+\section{Setting of the problem} 
+\begin{definition}
+    Let $\mu,\nu$ be two probability measures on a space $\mx$, we define the total variation between $\mu$ and $\nu$ as follows : 
+    \begin{equation*}
+        TV(\mu,\nu) = \sup_{E \subset \mx measurable} \left|P(E)-Q(E) \right| 
+    \end{equation*}
+    If $\mu,\nu$ have densities $f,g$ respectively with respect to another measure $\lambda$, then one has the equality : 
+    \begin{equation*}
+        TV(\mu,\nu) = \int \left|p(x)-q(x)\right| d\lambda(x)
+    \end{equation*}
+\end{definition}
+
+\noindent
+Now, suppose that one has two samples $X,Y$ of size $n$ from two distributions $\P_X$ and $\P_Y$ respectively on some space $\mx$ and wishes to test the hypotheses : 
+\begin{equation*}
+    \H_0 : \P_X = \P_Y \ \text{ versus } \ \H_1 : TV(\P_X,\P_Y) \geq \epsilon
+\end{equation*}
+for some $\epsilon > 0$, by using machine learning classifiers. Given such hypotheses $\H_0,\H_1$ seen as families of distributions on $\mx$, we say that a decision rule $\psi : \mx \rightarrow \left\{0,1\right\}$ tests the two hypothesis against each other with error at most $\delta \in \left\{0,\frac{1}{2}\right\}$ if : 
+\begin{equation*}
+    \max_{i=0,1}\max_{P\in \H_i} \P_{S\sim P}\Bigl(\psi(S)\neq i\Bigr) \leq \delta
+\end{equation*}
+The idea of using classifiers, firstly described by \citet{friedmanCAT}, consists of training a binary classifier $\mathcal{C}:\mx \rightarrow \left\{0,1\right\}$ on the labeled data $\cup_{i=1}^n \bigl\{\left(X_i,0\right),\left(Y_i,0\right)\bigr\}$ and compare the samples $\mathcal{C}(X_1),\dots,\mathcal{C}(X_n)$ to $\mathcal{C}(Y_1),\dots,\mathcal{C}(Y_n)$. \textbf{ADD MORE DETAILS} \\
+We will follow the framework described by \citet{gerberclas} as "Classifier-Accuracy testing" (CAT) for goodness-of-fit testing : \\
+\indent Suppose we have a sample $X$ of size $2n$ from an unknown distribution $\P_X$ that we will split into 2 halves $X = X^\text{tr} \sqcup X^\text{te}$ and another sample $Y$ of size $2n$ from a known distribution $\P_Y$ which corresponds to our null hypothesis, we will split this sample in the same manner as for the previous sample into $Y = Y^\text{tr}\sqcup Y^\text{te}$. We train a classifier $\mathcal{C}:\mx \rightarrow \left\{0,1\right\}$ on the input $\mathcal{D}^\text{tr} \coloneqq = \bigl\{X^\text{te},Y^\text{te}\bigr\}$
+that aims to assign $1$ to $\P_X$ and $0$ to $\P_Y$. In practice, it is easier to think of $\mathcal{C}$ in terms of the separating set $S \coloneqq \mathcal{C}^{-1}(\left\{1\right\})$ which is a random set whose randomness come from the splitting of our samples and potentially an external seed. \\
+
+\begin{definition}
+    Given two datasets $\bigl\{A_i\bigr\}_{i=1}^a,\bigl\{B_j\bigr\}_{j=1}^b$, we define the classifier-accuracy stastistic s : 
+    \begin{equation*}
+        T_S(A,B) \coloneqq \frac{1}{a}\sum_{i=1}^a \ind{A_i \in S} - \frac{1}{b}\sum_{j=1}^{b} \ind{B_j \in S}
+    \end{equation*}
+\end{definition}
+
+Finally, we threshold the output $\left|T_S\right|$ of the test data $\mathcal{D}^\text{te} \coloneqq\bigl\{X^\text{te},Y^\text{te}\bigr\}$
+
+\subsection{The Sobolev ellipsoid and Gaussian sequence model} 
+In this project, we will restrict ourselves to a very specific class of distributions, the Gaussian sequence model with mean vector in the Sobolev ellipsoid that we will define below. 
+\begin{definition}
+    Let $s>0, C>0$. We define the Sobolev ellipsoid $\mathcal{E}(s,C)$ as follows : 
+    \begin{equation*}
+       \mathcal{E}(s,C) \coloneqq \Bigl\{\theta \in \R^\N : \sum _{j=1}^\infty j^{2s}\theta_j^2 \leq C\Bigr\} 
+    \end{equation*}
+    For a sequence $\theta \in \mathcal{E}(s,C)$, we define $\mu_\theta = \bigotimes_{j=1}^\infty \cN(\theta_j,1)$. The set of Gaussian sequence model distributions is hence defined as : 
+    \begin{equation*}
+        \mathcal{P}_G(s,C_G) \coloneqq \bigl\{\mu_\theta ; \theta \in \mathcal{E}(s,C_G)\bigr\}
+    \end{equation*}
+\end{definition}
+\textbf{ADD MORE DETAILS ABOUT THE INTUITION BEHIND GAUSSIAN SEQUENCE MODEL}
+
+\section{Preliminary results :} 
+The hard part of this kind of frameworks consists in finiding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
+\begin{definition}
+    Let $S \subseteq \mx$ be a measurable set, and $\mu,\nu$ be two probability measures on $\mx$. We define the separation and size of $S$ respectively as follows : 
+    \begin{equation*}
+        \sep(S) = \mu(S)-\nu(S) \ \text{ and } \ \tau(S) = \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c))
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}\label{lem:lemma1}\citet[Lemma~1]{gerberclas}\\
+    Consider the hypothesis testing problem $\H_0 : p = q$ versus any other alternative $\H_1$. Suppose that the learner has constructed a separating set $S$ such that : 
+    \begin{equation*}
+        \forall \mu,\nu \in \H_1 : \left|\sep(S)\right| = \left|\mu(S)-\nu(S)\right| \geq \underbar{sep} \ \text{ and }\ \forall\mu,\nu \in \H_0 \cup \H_1 : \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c)) \leq \bar{\tau}
+    \end{equation*}
+    Then, using only the knowledge of $\bar{\tau}$, the classifier-accuracy test with samples of size $n$ from both $p$ and $q$ and an appropriate threshold achieves type-I and type-II errors at most $\delta$ provided that : 
+    \begin{equation*}
+        n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{sep}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{sep}}\Bigr)
+    \end{equation*}
+    for a large enough constant $c >0$
+\end{lemma}
+\begin{remark}
+With \Cref{lem:lemma1}, one can imagine that a separating can be referred to as "good" if $\left|\sep(S)\right|$ is large under $H_1$, and $\tau(S)$ is small under both $H_0$ and $\H_1$ with probability $1-\delta$
+\end{remark}
+In order to prove \cref{lem:lemma1}, we will need a prior result on the Bernstein concentration of the classifier accuracy statistics. 
+\begin{lemma}\label{lem:lemma2} \citet[Lemma~8]{gerberclas}
+Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,B_m \overset{iid}{\sim} \text{Ber}(q)$. Let $\tau = \min(p(1-p),q(1-q))$, and let $\bar{A},\bar{B}$ be their empirical means, respectively. There exists a universal constant $c>0$ such that :
+\begin{equation*}
+    \begin{aligned}
+        \P\Bigg(\left|\bar{A}-\bar{B}\right|\leq \frac{1}{2}\left|p-q\right| -\frac{1}{2}\sqrt{\frac{c\log(1/\delta)\tau}{\min(n,m)}} -\frac{1}{2}\frac{c\log(1/\delta)}{\min(n,m)} \Bigg) &\leq \delta, \\
+        \P\Bigg(\left|\bar{A}-\bar{B}\right|\geq 2\left|p-q\right| + 2\sqrt{\frac{c\log(1/\delta)\tau}{\min(n,m)}} + 2\frac{c\log(1/\delta)}{\min(n,m)} \Bigg) &\leq \delta
+    \end{aligned}
+\end{equation*} 
+\end{lemma}
+\begin{proof}[Proof of \cref{lem:lemma1}]
+    Using $n$ test samples from $(X,Y)$, consider the following classifier-accuracy test: we accept $\H_0$ if  
+    \begin{equation*}
+        \Bigg| \frac{1}{n} \sum_{i=1}^{n} \ind{X_i \in S}-\ind{Y_i \in S} \Bigg| \leq \sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}
+    \end{equation*}
+    and reject the null hypothesis otherwise. Above, $c>0$ is a large absolut constant, and note that the threshold only relies on the knowledge of $\bar{\tau},n$ and $\delta$
+\end{proof}

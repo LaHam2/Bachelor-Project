@@ -20,20 +20,31 @@
 \usepackage{subfiles}
 \usepackage{natbib,enumerate} 
 \usepackage[]{hyperref}
+\usepackage{cleveref}
 %some weird packages
 \usepackage{halloweenmath}
 \usepackage{mathpazo}
 \usepackage{knitting}
+\usepackage{dsfont}
 
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\H}{\mathcal{H}}
 \newcommand{\eqtext}[1]{\ensuremath{\stackrel{#1}{=}}}
 \newcommand{\leqtext}[1]{\ensuremath{\stackrel{#1}{\leq}}}
-\newtheorem{theorem}{Proposition}[section]
-\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}{Proposition}
+\newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{remark}{Remark}
+\newtheorem{prop}{Proposition}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\E}{\mathbb{E}}
-\newcommand{\epl}{\varepsilon}
+\newcommand{\mx}{\mathcal{X}}
+\newcommand{\ms}{\mathcal{S}}
+\newcommand{\ind}[1]{\mathds{1}_{#1}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\sep}{\text{sep}}
+
