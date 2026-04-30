@@ -1,0 +1,17 @@
+In this project we analyse a model for describing the trajectory of particles of pollutants in groundwater. A successful model for describing underground flows is given by the uncertain Darcy problem. Given a domain $D$ such that its boundary $\partial D$ is divided in three subsets $\Gamma_{\rm in}, \Gamma_{\rm out}, \Gamma_N$ such that 
+\begin{equation*}
+	\Gamma_{\rm in} \cup \Gamma_{\rm out} \cup \Gamma_N = \partial D, \quad \Gamma_{\rm in} \cap \Gamma_{\rm out} \cap \Gamma_N = \emptyset,
+\end{equation*} 
+the pressure and velocity fields $p$ and $u$ are given by the solution of the following Partial Differential Equation (PDE)
+\begin{equation}
+	\label{eq:IntroDarcy}
+	\left \{
+	\begin{aligned}
+		u &= -A \nabla p, && \text{in } D, \\
+		\nabla\cdot u &= f, && \text{in } D, \\
+		p &= p_0, && \text{on } \Gamma_{\rm in},\\
+		p &= 0, && \text{on } \Gamma_{\rm out}, \\
+		\nabla p \cdot n &= 0, && \text{on } \Gamma_N,
+	\end{aligned} \right.
+\end{equation}
+where $\Gamma_{\rm in}$, $\Gamma_{\rm out}$ are the inlet and outlet portions of the boundary of $D$, and an impermeability condition is imposed on $\Gamma_N$.

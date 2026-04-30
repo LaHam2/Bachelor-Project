@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{gerberclas}
+Patrik~R. Gerber, Yanjun Han, and Yury Polyanskiy.
+\newblock Minimax optimal testing by classification.
+\newblock In Gergely Neu and Lorenzo Rosasco, editors, {\em Proceedings of Thirty Sixth Conference on Learning Theory}, volume 195 of {\em Proceedings of Machine Learning Research}, pages 5395--5432. PMLR, 12--15 Jul 2023.
+
+\bibitem{polyanskiy2025information}
+Y.~Polyanskiy and Y.~Wu.
+\newblock {\em Information Theory: From Coding to Learning}.
+\newblock Cambridge University Press, 2025.
+
+\end{thebibliography}

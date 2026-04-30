@@ -1,0 +1,20 @@
+\section{Description of the problem}
+In this section, we are studying the results of \cite{gerberclas} which consists of finding the minimum number of observations $n$ 
+in order to be able to perform a test with probability error less than $\delta \in (0,\frac{1}{2})$ to the hypotheses : 
+\begin{equation*}
+    H_0 : P_X = P_0 \text{ vs } H_1 : \text{TV}(P_X,P_0) \geq \varepsilon
+\end{equation*}
+For some $\varepsilon > 0$ and a distribution $P_0 \sim \bigotimes_{j=1}^\infty \mathcal{N}(0,1)$ following a Gaussian sequence model
+\section{Sobolev ellipsoid}
+\begin{definition}
+    Let $s,C >0$. We define the Sobolev ellipsoid of smoothness $s$ and size $C$ as the subset of real sequences : 
+    \begin{equation*}
+        \mathcal{E}(s,C) \coloneqq \{\theta \in \mathbb{R}^\mathbb{N} : \sum_{j=1}^\infty j^{2s}\theta_j^2 \leq C \}
+    \end{equation*}
+    For such a sequence $\theta \in \mathcal{E}(s,C)$, define the probability distribution  $\mu_\theta  \coloneqq \bigotimes_{j=1}^\infty \mathcal{N}(\theta_j,1)$, and define the set of Gaussian sequence distributions as : 
+    \begin{equation*}
+        \mathcal{P}(s,C) \coloneqq \{\mu_\theta ; \theta \in \mathcal{E}(s,C)\}
+    \end{equation*}
+\end{definition}
+The study of such models is motivated by the classical white noise model \cite{polyanskiy2025information}.
+

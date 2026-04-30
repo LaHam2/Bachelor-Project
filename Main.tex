@@ -1,0 +1,42 @@
+\documentclass{report}
+
+%in that file you will find the packages and other macro needed like \R for the real number set. 
+\input{Preamble}
+
+\date{\today}
+
+\begin{document}
+
+
+%this creates the title page. You must complete the information there
+\hypersetup{pageanchor=false} 
+\input{Titlepage}
+
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+
+\clearpage
+\hypersetup{pageanchor=true} % to start numbering after title and ToC pages
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\chapter{Introduction}
+\subfile{Introduction.tex}
+
+\chapter{Minimax optimal testing by classification for Gaussian models}
+\subfile{Minimax optimal testing by classification for Gaussian models .tex}
+
+\chapter{Optimal transport based methods in Goodness-of-Fit problems}
+\subfile{Optimal transport.tex}
+
+\chapter{Conclusion}
+\subfile{Conclusion.tex}
+
+
+\clearpage
+\bibliography{biblio}
+\bibliographystyle{plain}
+
+\end{document}
+
