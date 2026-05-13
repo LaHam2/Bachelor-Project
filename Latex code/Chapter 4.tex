@@ -71,7 +71,7 @@ The hard part of this kind of frameworks consists in finiding a good separating 
 With \Cref{lem:lemma1}, one can imagine that a separating can be referred to as "good" if $\left|\sep(S)\right|$ is large under $H_1$, and $\tau(S)$ is small under both $H_0$ and $\H_1$ with probability $1-\delta$
 \end{remark}
 In order to prove \cref{lem:lemma1}, we will need a prior result on the Bernstein concentration of the classifier accuracy statistics. 
-\begin{lemma}\label{lem:lemma2} \citet[Lemma~8]{gerberclas}
+\begin{lemma}\label{lem:lemma2} \citet[Lemma~8]{gerberclas}\\
 Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,B_m \overset{iid}{\sim} \text{Ber}(q)$. Let $\tau = \min(p(1-p),q(1-q))$, and let $\bar{A},\bar{B}$ be their empirical means, respectively. There exists a universal constant $c>0$ such that :
 \begin{equation*}
     \begin{aligned}
@@ -93,3 +93,21 @@ Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,
      \end{equation*}
      By the assumed lower bound $n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$sep$}}\Bigr)$, we will reject $\H_0$ as desired.
 \end{proof}
+\begin{prop}\label{prop1}\citet[Prop~1]{gerberclas}
+    Let $\P$ and $\Q$ be two probablity measures on a probability space $\mx$, and let $\mc$ be a possibly randomized classifier. Then the following inequality is true : 
+    \begin{equation*}
+        TV(\P,\Q) \leq 2\sup \bigl\{\P(\mc(X) =0) -\Q(\mc(X)=0) \text{ over } X \text{satisfying} \P(\mc(X)=0) = \Q(\mc(X)=1) \bigr\}
+    \end{equation*}
+    In the inequality above, the constant 2 is tight.
+\end{prop}
+In order to prove \Cref{prop1} we will need the following lemma : 
+\begin{lemma}\label{lemma3}
+    Let $\mu$ be a non-negative measure on a measurable space $\mx$, and let $a,b:\mx\rightarrow\R_+$ such that $\int a(x) d\mu(x) >0$ and $\forall x \in \mx : b(x) = 0 \implies a(x) = 0$. Then the following holds : 
+    \begin{equation*}
+        \inf_{x \in \supp(\mu)}\frac{a(x)}{b(x)} \leq \frac{\int a(x) d\mu(x)}{\int b(x) d\mu(x)} \leq \sup_{x \in \supp(\mu)}\frac{a(x)}{b(x)}
+    \end{equation*}
+\end{lemma}
+\begin{proof}[Proof of \Cref{prop1}]
+    \textbf{ADD PROOF}
+\end{proof}
+

@@ -1,7 +1,7 @@
 \documentclass{report}
 
 %in that file you will find the packages and other macro needed like \R for the real number set. 
-\input{Preamble}
+\input{Utils/preamble}
 
 \date{\today}
 
@@ -22,18 +22,29 @@
 \setcounter{page}{1}
 
 \chapter{Introduction}
-\subfile{Introduction.tex}
+\label{intro}
+\subfile{Chapter 1}
 
-\chapter{Minimax optimal testing by classification for Gaussian models}
-\subfile{Minimax optimal testing by classification for Gaussian models .tex}
+\chapter{Minimax Hypothesis testing in the Gaussian sequence testing}
+\label{minimax}
+\subfile{Chapter 2}
 
-\chapter{Optimal transport based methods in Goodness-of-Fit problems}
-\subfile{Optimal transport.tex}
+\chapter{}
+\label{}
+\subfile{Chapter 3}
+
+\chapter{Goodness-of-fit using Classifier-Accuracy tests}
+\label{CAT}
+\subfile{Chapter 4.tex}
+
 
 \chapter{Appendix}
-\subfile{Appendix.tex}
+\label{appendix}
+\subfile{Utils/Appendix}
+
 \chapter{Conclusion}
-\subfile{Conclusion.tex}
+\label{conc}
+\subfile{Utils/Conclusion}
 
 
 \clearpage
