@@ -118,7 +118,7 @@ Suppose one have two samples $X,Y$ of size $n\in \N$ from $\mu_{\theta^X} \colon
 Moreover, assume that $TV(\mut{\theta^X},\mut{\theta^Y}) \geq \epsilon >0$, and let $\hat{\theta}^X, \hat{\theta}^Y$ denote the empirical means from the two samples respectively.
 Define the following statistic : 
 \begin{equation}\label{statseparating}
-    T(Z) = 2\sum_{j=1}^{J} \Bigl(\hat{\theta}_j^X-\hat{\theta}_j^Y\Bigr)\Biggl(Z_j - \frac{\hat{\theta}_j^X+\hat{\theta}_j^_Y}{2}\Biggr)
+    T(Z) = 2\sum_{j=1}^{J} \Bigl(\hat{\theta}_j^X-\hat{\theta}_j^Y\Bigr)\Biggl(Z_j - \frac{\hat{\theta}_j^X+\hat{\theta}_j^Y}{2}\Biggr)
 \end{equation}
 for some $J\in \N$ to be specified. We construct the separating set as follows : \begin{equation}\label{sepset}
     \hat{S} \coloneqq \bigl\{Z \in \R^\N : T(Z)\geq 0\bigr\}
@@ -132,7 +132,7 @@ The performance of this construction of separating set is summarized in the stat
 \end{prop}
 In order to prove this proposition, we will need few lemmas and prior results. 
 \begin{lemma}
-    Let $sep(\hat{S}) = \mut{\theta^X}(\hat{S})- \mut{\theta^Y}(\hat{S})$ as defined above. There exists universal constants $c_i >0$, i = 1,2,$\cdots$,5 such that for $J = \big\lfloor c_1\epsilon^{-\frac{1}{s}\big\rfloor$ and for $t \geq 0$, one has : 
+    Let $sep(\hat{S}) = \mut{\theta^X}(\hat{S})- \mut{\theta^Y}(\hat{S})$ as defined above. There exists universal constants $c_i >0$, i = 1,2,$\cdots$,5 such that for $J = \big\lfloor c_1\epsilon^{-\frac{1}{s}}\big\rfloor$ and for $t \geq 0$, one has : 
     \begin{align}
         \E[sep(\hat{S})] + \frac{c_2}{\sqrt{n}} &\geq \frac{c_3 \epsilon^2}{\epsilon + \sqrt{\frac{J}{n}}} \\
         \P\Biggl(\Big|sep(\hat{S})-\E sep(\hat{S}) \Big| \geq t+ \frac{c_4}{\sqrt{n}}\Biggr) &\leq 2 \exp(-c_5nt^2)
