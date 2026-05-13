@@ -1,3 +1,5 @@
+\textcolor{blue}{Maybe a small introduction to the goal of this section and the theorem that we want to prove}
+
 \section{Setting of the problem} 
 \begin{definition}
     Let $\mu,\nu$ be two probability measures on a space $\mx$, we define the total variation between $\mu$ and $\nu$ as follows : 
@@ -45,7 +47,7 @@ In this project, we will restrict ourselves to a very specific class of distribu
         \mathcal{P}_G(s,C_G) \coloneqq \bigl\{\mu_\theta ; \theta \in \mathcal{E}(s,C_G)\bigr\}
     \end{equation*}
 \end{definition}
-\textbf{ADD MORE DETAILS ABOUT THE INTUITION BEHIND GAUSSIAN SEQUENCE MODEL}
+\textcolor{red}{Intuition about the choice of this model}
 
 \section{Preliminary results } 
 The hard part of this kind of frameworks consists in finiding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
@@ -108,6 +110,55 @@ In order to prove \Cref{prop1} we will need the following lemma :
     \end{equation*}
 \end{lemma}
 \begin{proof}[Proof of \Cref{prop1}]
-    \textbf{ADD PROOF}
+    \textcolor{red}{Add proof }
 \end{proof}
 
+\section{Performance of the CAT test in the Gaussian case}
+Suppose one have two samples $X,Y$ of size $n\in \N$ from $\mu_{\theta^X} \coloneqq \bigotimes_{j=1}^\infty \mathcal{N}(\theta_j^X,1)$ and $\mut{\theta^Y}$, respectively and such that $\mu^X,\mu^Y$ have bounded Sobolev norm. 
+Moreover, assume that $TV(\mut{\theta^X},\mut{\theta^Y}) \geq \epsilon >0$, and let $\hat{\theta}^X, \hat{\theta}^Y$ denote the empirical means from the two samples respectively.
+Define the following statistic : 
+\begin{equation}\label{statseparating}
+    T(Z) = 2\sum_{j=1}^{J} \Bigl(\hat{\theta}_j^X-\hat{\theta}_j^Y\Bigr)\Biggl(Z_j - \frac{\hat{\theta}_j^X+\hat{\theta}_j^_Y}{2}\Biggr)
+\end{equation}
+for some $J\in \N$ to be specified. We construct the separating set as follows : \begin{equation}\label{sepset}
+    \hat{S} \coloneqq \bigl\{Z \in \R^\N : T(Z)\geq 0\bigr\}
+\end{equation}
+The performance of this construction of separating set is summarized in the statement of the following result : 
+\begin{prop}\citet{gerberclas}\label{CATperf}
+    There exists universal constants $c,c'$ such that for $J = \big\lfloor c\epsilon^{-\frac{1}{s}}\big\rfloor$ the following inequality holds provided $n \gtrsim \frac{1}{c'}n(\epsilon,\delta)$ : 
+    \begin{equation}\label{ineqperf}
+        \P\Bigg( \mut{\theta^X}(\hat{S}) - \mut{\theta^Y}(\hat{S}) \geq c'\cdot \min\Big(\sqrt{n\epsilon^{\frac{1}{s}}},\frac{1}{\epsilon}\Big)\cdot \epsilon^2 \Bigg) \geq 1 -\delta
+    \end{equation}
+\end{prop}
+In order to prove this proposition, we will need few lemmas and prior results. 
+\begin{lemma}
+    Let $sep(\hat{S}) = \mut{\theta^X}(\hat{S})- \mut{\theta^Y}(\hat{S})$ as defined above. There exists universal constants $c_i >0$, i = 1,2,$\cdots$,5 such that for $J = \big\lfloor c_1\epsilon^{-\frac{1}{s}\big\rfloor$ and for $t \geq 0$, one has : 
+    \begin{align}
+        \E[sep(\hat{S})] + \frac{c_2}{\sqrt{n}} &\geq \frac{c_3 \epsilon^2}{\epsilon + \sqrt{\frac{J}{n}}} \\
+        \P\Biggl(\Big|sep(\hat{S})-\E sep(\hat{S}) \Big| \geq t+ \frac{c_4}{\sqrt{n}}\Biggr) &\leq 2 \exp(-c_5nt^2)
+    \end{align}
+\end{lemma}
+\textcolor{red}{Add proof}
+\begin{lemma}
+    W is a sub-Gaussian random variable with variance proxy $\frac{1}{2n}$
+\end{lemma}
+\textcolor{blue}{Proof in the appendix}
+
+\begin{proof}[Proof of \Cref{CATperf}]
+    \textcolor{red}{Add proof}
+\end{proof}
+\section{Sample complexity of CAT for Gaussian sequence model}
+Given two hypotheses $H_0,H_1$, our goal is to find a lower bound for the minimum achievable worst-case error. 
+Firstly, we use the fact that for any random probability distributions $P_0,P_1$ with $\P(P_i\in H_i)=1$ for $i=1,2$, one has that : 
+\begin{equation}\label{lowerbounderror}
+    \min_{\psi}\max_{i=0,1}\sup_{P\in H_1} \P_{S\sim P} \big(\psi(S) \neq i \big) \geq \frac{1}{2}\big(1-TV(\E P_0,\E P_1)\big)
+\end{equation}
+Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound of order $\delta$ on the minimax error is equivalent to finding mixtures $\E P_0,\E P_1$ such that $1-TV(\E P_0,\E P_1)$ is of order $\delta$ (is $\Omega(\delta))$
+
+\begin{lemma}
+    Let $\mu,\nu$ be two probability measures, then : 
+    \begin{equation*}
+        1-TV(\mu,\nu) \geq \frac{1}{2} e^{-KL(\mu \Vert \nu)} \geq \frac{1}{2\bigl(1 + \chi^2(\mu\Vert\nu) \bigr)}
+    \end{equation*}
+    Where $KL(\cdot \Vert \cdot)$ and $\chi^2(\cdot \Vert \cdot)$ denote the Kullback-Leibler and $\chi^2$ divergences respectively. 
+\end{lemma}

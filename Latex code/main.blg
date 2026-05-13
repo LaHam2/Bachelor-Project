@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: biblio.bib
+Warning--empty journal in friedmanCAT
+You've used 4 entries,
+            2773 wiz_defined-function locations,
+            625 strings with 5548 characters,
+and the built_in function-call counts, 1770 in all, are:
+= -- 158
+> -- 79
+< -- 5
++ -- 27
+- -- 23
+* -- 126
+:= -- 275
+add.period$ -- 17
+call.type$ -- 4
+change.case$ -- 17
+chr.to.int$ -- 4
+cite$ -- 9
+duplicate$ -- 95
+empty$ -- 154
+format.name$ -- 29
+if$ -- 377
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 6
+newline$ -- 31
+num.names$ -- 18
+pop$ -- 44
+preamble$ -- 1
+purify$ -- 15
+quote$ -- 0
+skip$ -- 70
+stack$ -- 0
+substring$ -- 48
+swap$ -- 19
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 34
+warning$ -- 1
+while$ -- 16
+width$ -- 0
+write$ -- 64
+(There was 1 warning)
