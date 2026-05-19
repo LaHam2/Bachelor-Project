@@ -61,11 +61,11 @@ The hard part of this kind of frameworks consists in finiding a good separating 
 \begin{lemma}\label{lem:lemma1}\citet[Lemma~1]{gerberclas}\\
     Consider the hypothesis testing problem $\H_0 : p = q$ versus any other alternative $\H_1$. Suppose that the learner has constructed a separating set $S$ such that : 
     \begin{equation*}
-        \forall \mu,\nu \in \H_1 : \left|\sep(S)\right| = \left|\mu(S)-\nu(S)\right| \geq \underbar{$sep$} \ \text{ and }\ \forall\mu,\nu \in \H_0 \cup \H_1 : \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c)) \leq \bar{\tau}
+        \forall \mu,\nu \in \H_1 : \left|\sep(S)\right| = \left|\mu(S)-\nu(S)\right| \geq \underbar{$\sep$} \ \text{ and }\ \forall\mu,\nu \in \H_0 \cup \H_1 : \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c)) \leq \bar{\tau}
     \end{equation*}
     Then, using only the knowledge of $\bar{\tau}$, the classifier-accuracy test with samples of size $n$ from both $p$ and $q$ and an appropriate threshold achieves type-I and type-II errors at most $\delta$ provided that : 
     \begin{equation*}
-        n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$sep$}}\Bigr)
+        n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$\sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$\sep$}}\Bigr)
     \end{equation*}
     for a large enough constant $c >0$
 \end{lemma}
@@ -88,29 +88,67 @@ Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,
         \Bigg| \frac{1}{n} \sum_{i=1}^{n} \ind{X_i \in S}-\ind{Y_i \in S} \Bigg| \leq \sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}
     \end{equation*}
     and reject the null hypothesis otherwise. Above, $c>0$ is a large absolut constant, and note that the threshold only relies on the knowledge of $\bar{\tau},n$ and $\delta$\\
-    To analyse type-I and type-II errors , first, assume that $\H_0$ holds. Since $\sep(S) = 0$ under the latter hypothesis, the second statement of \Cref{lem:lemma2} implies that we accept $\H_0$ with probability at least $1-\frac{/delta}{2}$ if $c$ is large enough.
+    To analyse type-I and type-II errors , first, assume that $\H_0$ holds. Since $\sep(S) = 0$ under the latter hypothesis, the second statement of \Cref{lem:lemma2} implies that we accept $\H_0$ with probability at least $1-\frac{\delta}{2}$ if $c$ is large enough.
     Moreover, if $\H_1$ holds, with probability at least $1-\frac{\delta}{2}$, the first statement of \Cref{lem:lemma2} implies that : 
     \begin{equation*}
-        \Bigg| \frac{1}{n}\sum_{i=1}^{n} \ind{X_i \in S} -\ind{Y_i \in S} \Bigg| \geq \left| \underbar{$sep$} \right| + \Bigl(\sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}\Bigr)
+        \Bigg| \frac{1}{n}\sum_{i=1}^{n} \ind{X_i \in S} -\ind{Y_i \in S} \Bigg| \geq \left| \underbar{$\sep$} \right| + \Bigl(\sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}\Bigr)
      \end{equation*}
-     By the assumed lower bound $n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$sep$}}\Bigr)$, we will reject $\H_0$ as desired.
+     By the assumed lower bound $n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$\sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$\sep$}}\Bigr)$, we will reject $\H_0$ as desired.
 \end{proof}
 \begin{prop}\label{prop1}\citet[Prop~1]{gerberclas}
     Let $\P$ and $\Q$ be two probablity measures on a probability space $\mx$, and let $\mc$ be a possibly randomized classifier. Then the following inequality is true : 
     \begin{equation*}
-        TV(\P,\Q) \leq 2\sup \bigl\{\P(\mc(X) =0) -\Q(\mc(X)=0) \text{ over } X \text{satisfying} \P(\mc(X)=0) = \Q(\mc(X)=1) \bigr\}
+        TV(\P,\Q) \leq 2\sup \bigl\{\P(\mc(X) =0) -\Q(\mc(X)=0) \text{ over } X \ \text{satisfying} \ \P(\mc(X)=0) = \Q(\mc(X)=1) \bigr\}
     \end{equation*}
     In the inequality above, the constant 2 is tight.
 \end{prop}
 In order to prove \Cref{prop1} we will need the following lemma : 
-\begin{lemma}\label{lemma3}
+\begin{lemma}\label{sixseven}
     Let $\mu$ be a non-negative measure on a measurable space $\mx$, and let $a,b:\mx\rightarrow\R_+$ such that $\int a(x) d\mu(x) >0$ and $\forall x \in \mx : b(x) = 0 \implies a(x) = 0$. Then the following holds : 
     \begin{equation*}
         \inf_{x \in \supp(\mu)}\frac{a(x)}{b(x)} \leq \frac{\int a(x) d\mu(x)}{\int b(x) d\mu(x)} \leq \sup_{x \in \supp(\mu)}\frac{a(x)}{b(x)}
     \end{equation*}
 \end{lemma}
+\begin{proof}
+    \textcolor{red}{Appendix}
+\end{proof}
 \begin{proof}[Proof of \Cref{prop1}]
-    \textcolor{red}{Add proof }
+    Let $p,q$ be the densities of $\P,\Q$ with respect to a common dominated measure (e.g. $\P+\Q$), and define $E \coloneqq \left\{p(x) > q(x)\right\}$, then $TV(\P,\Q) = \P(E)-\Q(E) \geq 0$. Without loss of generality, assume that $\P(E)+Q(\E) \geq 1$, and for $t \in [0,1]$, define : \begin{equation*}
+        E_t \coloneqq \Bigl\{.\frac{p(x)-q(x)}{p(x)+q(x)} \geq t \Bigr\}
+    \end{equation*}
+    Then, the map $t \mapsto \P(E_t)+\Q(E_t)$ is non-increasing and left-continuous, and note that $E_0 = E$ and $E_1 = \emptyset$.
+    Hence, the maximum $t^* \coloneqq \max \bigl\{t \in [0,1] : \P(E_t) +\Q(E_t) \geq 1\bigr\}$ exists. Now, define the randomized classifier $\mathcal{C}$ as follows : 
+    \begin{equation*}
+        \mathcal{C}(x) \coloneqq \begin{cases*}
+            0 \ &if $x \in E_{(t^*)^+}$ \\
+            1  \ &if $x \notin E_{t^*}$ \\
+            \text{Ber}(x) &if $x \in E_{t^*}\backslash E_{(t^*)^+}$
+        \end{cases*}
+    \end{equation*}
+    Where : \begin{equation*}
+        E_{(t^*)^+} \coloneqq \cap_{t>t^*}E_t \ \text{ and } \ r = \frac{1-\P(E_{(t^*)^+})-\Q(E_{(t^*)^+})}{\P(E_{t^*})+\Q(E_{t^*})-\P(E_{(t^*)^+})-\Q(E_{(t^*)^+})} \in [0,1]
+    \end{equation*}
+    Note that this classifier is balanced since 
+        $\P(\mathcal{C}(X)=0)+ \Q(\mathcal{C}(X) = 0) = 1$ .\\
+    Now, for $t \in [0,1]$, define : 
+    \begin{equation*}
+        f(t) \coloneqq \begin{cases*}
+            \frac{\P(E_t)-\Q(E_t)}{\P(E_t)+\Q(E_t)} & if $\P(E_t) + \Q(E_t) >0$ \\ 
+            1 & otherwise 
+        \end{cases*}
+    \end{equation*}
+    Now, let $0\leq t \leq s \leq 1$, we want to show that $f(t) \leq f(s)$. Without loss of generality, assume that $f(s) < 1$ and that $\P(E_t) + \Q(E_t) >0$. Notice also that (it can be proven using simple algebraic manipulations): 
+    \begin{equation*}
+        f(t) \leq f(s) \Leftrightarrow \frac{\int_{E_t \backslash E_s} p-q}{\int_{E_t \backslash E_s} p+q} \leq \frac{\int_{E_s} p-q}{\int_{E_s} p+q}
+    \end{equation*}
+    However, this inequality follows from \Cref{sixseven}. In fact : \begin{equation*}
+        \textcolor{red}{Add more details}
+    \end{equation*}
+    Thus, it holds that : \begin{equation*}
+        \frac{\P\bigl(\mathcal{C}(X) =0\bigr) - \Q\bigl(\mathcal{C}(X) = 0\bigr)}{\P\bigl(\mathcal{C}(X) =0\bigr) + \Q\bigl(\mathcal{C}(X) = 0\bigr)} \geq f(t^*)\geq f(0) = \frac{\P(E)-\Q(E)}{\P(E)+\Q(E)}
+    \end{equation*}
+    Plugging in $\P\bigl(\mathcal{C}(X) =0\bigr) + \Q\bigl(\mathcal{C}(X) = 0\bigr) = 1 $ and $\P(E)+\Q(E)\leq 2$ yields the final result. 
+    For the tightness, consider $p(x) = \ind{[0,1],q(x) = (1+\epsilon)\ind{[0,\frac{1}{1+\epsilon}]}, \mathcal{C}(x) = \ind{(\frac{1}{2+\epsilon},1]}}$ and make $\epsilon \rightarrow 0$.
 \end{proof}
 
 \section{Performance of the CAT test in the Gaussian case}
@@ -132,10 +170,10 @@ The performance of this construction of separating set is summarized in the stat
 \end{prop}
 In order to prove this proposition, we will need few lemmas and prior results. 
 \begin{lemma}
-    Let $sep(\hat{S}) = \mut{\theta^X}(\hat{S})- \mut{\theta^Y}(\hat{S})$ as defined above. There exists universal constants $c_i >0$, i = 1,2,$\cdots$,5 such that for $J = \big\lfloor c_1\epsilon^{-\frac{1}{s}}\big\rfloor$ and for $t \geq 0$, one has : 
+    Let $\sep(\hat{S}) = \mut{\theta^X}(\hat{S})- \mut{\theta^Y}(\hat{S})$ as defined above. There exists universal constants $c_i >0$, i = 1,2,$\cdots$,5 such that for $J = \big\lfloor c_1\epsilon^{-\frac{1}{s}}\big\rfloor$ and for $t \geq 0$, one has : 
     \begin{align}
-        \E[sep(\hat{S})] + \frac{c_2}{\sqrt{n}} &\geq \frac{c_3 \epsilon^2}{\epsilon + \sqrt{\frac{J}{n}}} \\
-        \P\Biggl(\Big|sep(\hat{S})-\E sep(\hat{S}) \Big| \geq t+ \frac{c_4}{\sqrt{n}}\Biggr) &\leq 2 \exp(-c_5nt^2)
+        \E[\sep(\hat{S})] + \frac{c_2}{\sqrt{n}} &\geq \frac{c_3 \epsilon^2}{\epsilon + \sqrt{\frac{J}{n}}} \\
+        \P\Biggl(\Big|\sep(\hat{S})-\E \sep(\hat{S}) \Big| \geq t+ \frac{c_4}{\sqrt{n}}\Biggr) &\leq 2 \exp(-c_5nt^2)
     \end{align}
 \end{lemma}
 \textcolor{red}{Add proof}
@@ -155,10 +193,35 @@ Firstly, we use the fact that for any random probability distributions $P_0,P_1$
 \end{equation}
 Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound of order $\delta$ on the minimax error is equivalent to finding mixtures $\E P_0,\E P_1$ such that $1-TV(\E P_0,\E P_1)$ is of order $\delta$ (is $\Omega(\delta))$
 
-\begin{lemma}
+\begin{lemma}\label{rubignolle}
     Let $\mu,\nu$ be two probability measures, then : 
     \begin{equation*}
         1-TV(\mu,\nu) \geq \frac{1}{2} e^{-KL(\mu \Vert \nu)} \geq \frac{1}{2\bigl(1 + \chi^2(\mu\Vert\nu) \bigr)}
     \end{equation*}
     Where $KL(\cdot \Vert \cdot)$ and $\chi^2(\cdot \Vert \cdot)$ denote the Kullback-Leibler and $\chi^2$ divergences respectively. 
 \end{lemma}
+\begin{proof} [Proof of \Cref{rubignolle}] We will show that each one of the two inequalities hold true using Jensen inequality. 
+ \begin{itemize}
+    \item Equivalently, we will show that : \begin{equation*}
+        \int \log\Bigl(\frac{d\mu}{d\nu}\Bigr)d\mu = KL(\mu\Vert\nu) \leq \log(1+\chi^2(\mu\Vert\nu)) = \log\Bigl(\int \frac{d\mu}{d\nu}d\mu\Bigr)
+    \end{equation*}
+    Which is a direct consequence of Jensen inequality (since $\log$ is concave)
+    \item Instead of the inequality above, one will show that : \begin{equation*}
+        TV(\mu,\nu) \leq \sqrt{1-e^{-KL(\mu\Vert\nu)}} 
+    \end{equation*}
+    First, notice that : \begin{equation*}
+        TV(\mu, \nu) = 1- \int \bigl(d\mu \land d\nu\bigr) = \int \bigl(d\mu \lor d\nu\bigr) -1 
+    \end{equation*}
+    This implies that : \begin{align*}
+        1 - TV(\mu,\nu)^2 &= \bigl(1 - TV(\mu,\nu)\bigr)\bigl(1+TV(\mu,\nu)\bigr) \\
+        &= \int \bigl(d\mu \land d\nu\bigr)\int \bigl(d\mu \lor d\nu\bigr) \\
+        &\stackrel{\text{C-S}}{\geq} \Biggl(\int \sqrt{fg}\Biggr)^2 \  \text{ (Where $f,g$ are the densities)}\\ 
+        &= \exp\Biggl(2\log\Bigl(\int \sqrt{\frac{d\nu}{d\mu}} d\mu\Bigr)\Biggr) \\ 
+        &= \exp\Biggl(2\log\E_\mu \Biggl(\sqrt{\frac{d\mu}{d\nu}}\Biggr)^{-1} \Biggr) \\
+        &\geq \exp \Biggl(-\E_\mu \log\biggl(\frac{d\mu}{d\nu}\biggr)\Biggr) = \exp\biggl(-KL(\mu\Vert\nu)\biggr)
+    \end{align*}
+    And finally, one can conclude using the following inequality : $\sqrt{1-x} \leq 1-\frac{x}{2}$.
+ \end{itemize}
+ Combining the two points above yields the inequality.
+\end{proof}
+
