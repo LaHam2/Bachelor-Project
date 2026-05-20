@@ -35,6 +35,21 @@ that aims to assign $1$ to $\P_X$ and $0$ to $\P_Y$. In practice, it is easier t
 
 Finally, we threshold the output $\left|T_S\right|$ of the test data $\mathcal{D}^\text{te} \coloneqq\bigl\{X^\text{te},Y^\text{te}\bigr\}$
 
+The goal of this section will be two prove the following lower bound on the sample complexity of CAT testing, i.e. the minimum size of the sample for which there exists a CAT test that tests the two hypotheses against each other with probability error less than $\delta$. 
+This result can be summarized in the following theorem. 
+\begin{theorem}\label{samplecomplexitythm}\citet{gerberclas}
+    Given a known distribution $\P_0$ following a Gaussian sequence model with mean vector in the Sobolev ellipsoid $\mathcal{E}(s,C)$, consider the following goodness-of-fit problem : 
+    \begin{equation*}
+        \H_0 : \P_X = \P_0 \ \text{ versus } \ \H_1 : TV(\P_X,\P_0) \geq \epsilon
+    \end{equation*}
+    Where $P_X$ is the distribution of our sample $X$. Let $n(\epsilon, \delta, s)$ be the smallest number such that for all $n\geq n(\epsilon,\delta,s)$ there exists a function 
+    $\psi : \mx^n \rightarrow \{0,1\}$ which given our sample $X$ as input, tests between $\H_0$ and $\H_1$ with error probability at most $\delta$ for every $\P_X,\P_0 \in \mathcal{E}(s,C)$.
+    Then : 
+    \begin{equation*}
+        n(\epsilon, \delta,s) \gtrsim \frac{\sqrt{\log(\frac{1}{\delta})}}{\epsilon^{\frac{4s+1}{2s}}} + \frac{\log(\frac{1}{\delta})}{\epsilon^2}
+    \end{equation*}
+\end{theorem}
+
 \subsection{The Sobolev ellipsoid and Gaussian sequence model} 
 In this project, we will restrict ourselves to a very specific class of distributions, the Gaussian sequence model with mean vector in the Sobolev ellipsoid that we will define below. 
 \begin{definition}
@@ -150,12 +165,12 @@ In order to prove \Cref{prop1} we will need the following lemma :
 \begin{lemma}[Lipschitz concentration of Gaussians]\label{LipschitzConc}
     Let $Q$ be a $d$-dimensional standard gaussian, and let $f : \R^d \rightarrow \R$ be $\sigma$-Lipschitz. Then $f(Q)$ is sub-Gaussian with variance proxy $\sigma^2$
 \end{lemma}
-\begin{proof}[Proof of \Cref{LipschitzConc}] From \citet{HDP}\\
-    
+\begin{proof}[Proof of \Cref{LipschitzConc}] 
+    \textcolor{red}{Add proof, log-Sobolev inequality}
 \end{proof}
 \begin{lemma}\label{gaussianexpec}
     Let $a,b\in \R$, and let $Z$ be a standard normal. Then : \begin{equation*}
-        \E \Phi(aZ+b) = \Phi(\frac{b}{\sqrt{1+a^2}})
+        \E \Phi(aZ+b) = \Phi\bigg(\frac{b}{\sqrt{1+a^2}}\bigg)
     \end{equation*}
 \end{lemma}
 
@@ -221,7 +236,7 @@ In order to prove this proposition, we will need few lemmas and prior results.
     Where $W \coloneqq \scal{\theta^X-\theta^Y}{\frac{U}{\norm{U}}}$. To simplify notations, let $\varphi \coloneqq \Phi\Bigl(\frac{\cdot}{\sqrt{4+\frac{2}{n}}}\Bigr)$, by Lipschitness of $\Phi$, we obtain that for $t \geq 0$: \begin{align*}
         \P\Bigl( \Big|\varphi(W)-\E\varphi(W) \Big| \geq t\Bigr) &\leq \P\Bigl(\Bigr) \textcolor{red}{Finish the proof}
     \end{align*}
-\begin{lemma}
+\begin{lemma}\label{youssef}
     W is a sub-Gaussian random variable with variance proxy $\frac{1}{2n}$
 \end{lemma}
 \textcolor{blue}{Proof in the appendix}
