@@ -28,11 +28,11 @@
 \usepackage{dsfont}
 
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\P}{\mathbb{P}}
 \renewcommand{\H}{\mathcal{H}}
 \newcommand{\mpg}{\mathcal{P}^{G}}
+\let\minusplus\mp  
 \renewcommand{\mp}{\mathcal{P}}
 \renewcommand{\l}{\ell}
 \newcommand{\mut}[1]{\ensuremath{\mu_{#1}}}
@@ -54,4 +54,11 @@
 \newcommand{\sep}{\text{sep}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\supp}{\text{supp}}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\newcommand{\bignorm}[1]{\Bigg\Vert #1 \Bigg\Vert}
+\newcommand{\normp}[2][1]{\norm{#2}^#1}
+\newcommand{\var}[1]{\text{Var}(#1)}
+\newcommand{\scal}[2]{\langle #1,#2 \rangle}
+\newcommand{\bigscal}[2]{\Big\langle #1,#2 \Big\rangle}
+
 

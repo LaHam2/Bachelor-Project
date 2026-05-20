@@ -1,0 +1,8 @@
+\section{Some omitted proofs}
+\begin{proof}[Proof of \Cref{sixseven}]
+    We will prove the LHS inequality, the RHS can be proven in the exact same way : \begin{align*}
+        \int a(x) d\mu(x) &= \int \frac{a(x)}{b(x)} b(x) d\mu(x) \\
+        &\geq \Bigl(\inf_{x \in spt(\mu)} \frac{a(x)}{b(x)}\Bigr) \int b(x) d\mu(x)
+    \end{align*}
+    The last inequality is implied by the fact that $\forall x\in \mx : b(x) \geq 0$.
+\end{proof}

@@ -109,9 +109,6 @@ In order to prove \Cref{prop1} we will need the following lemma :
         \inf_{x \in \supp(\mu)}\frac{a(x)}{b(x)} \leq \frac{\int a(x) d\mu(x)}{\int b(x) d\mu(x)} \leq \sup_{x \in \supp(\mu)}\frac{a(x)}{b(x)}
     \end{equation*}
 \end{lemma}
-\begin{proof}
-    \textcolor{red}{Appendix}
-\end{proof}
 \begin{proof}[Proof of \Cref{prop1}]
     Let $p,q$ be the densities of $\P,\Q$ with respect to a common dominated measure (e.g. $\P+\Q$), and define $E \coloneqq \left\{p(x) > q(x)\right\}$, then $TV(\P,\Q) = \P(E)-\Q(E) \geq 0$. Without loss of generality, assume that $\P(E)+Q(\E) \geq 1$, and for $t \in [0,1]$, define : \begin{equation*}
         E_t \coloneqq \Bigl\{.\frac{p(x)-q(x)}{p(x)+q(x)} \geq t \Bigr\}
@@ -150,6 +147,17 @@ In order to prove \Cref{prop1} we will need the following lemma :
     Plugging in $\P\bigl(\mathcal{C}(X) =0\bigr) + \Q\bigl(\mathcal{C}(X) = 0\bigr) = 1 $ and $\P(E)+\Q(E)\leq 2$ yields the final result. 
     For the tightness, consider $p(x) = \ind{[0,1],q(x) = (1+\epsilon)\ind{[0,\frac{1}{1+\epsilon}]}, \mathcal{C}(x) = \ind{(\frac{1}{2+\epsilon},1]}}$ and make $\epsilon \rightarrow 0$.
 \end{proof}
+\begin{lemma}[Lipschitz concentration of Gaussians]\label{LipschitzConc}
+    Let $Q$ be a $d$-dimensional standard gaussian, and let $f : \R^d \rightarrow \R$ be $\sigma$-Lipschitz. Then $f(Q)$ is sub-Gaussian with variance proxy $\sigma^2$
+\end{lemma}
+\begin{proof}[Proof of \Cref{LipschitzConc}] From \citet{HDP}\\
+    
+\end{proof}
+\begin{lemma}\label{gaussianexpec}
+    Let $a,b\in \R$, and let $Z$ be a standard normal. Then : \begin{equation*}
+        \E \Phi(aZ+b) = \Phi(\frac{b}{\sqrt{1+a^2}})
+    \end{equation*}
+\end{lemma}
 
 \section{Performance of the CAT test in the Gaussian case}
 Suppose one have two samples $X,Y$ of size $n\in \N$ from $\mu_{\theta^X} \coloneqq \bigotimes_{j=1}^\infty \mathcal{N}(\theta_j^X,1)$ and $\mut{\theta^Y}$, respectively and such that $\mu^X,\mu^Y$ have bounded Sobolev norm. 
@@ -169,19 +177,55 @@ The performance of this construction of separating set is summarized in the stat
     \end{equation}
 \end{prop}
 In order to prove this proposition, we will need few lemmas and prior results. 
-\begin{lemma}
+\begin{lemma}\label{lemma13gerber}
     Let $\sep(\hat{S}) = \mut{\theta^X}(\hat{S})- \mut{\theta^Y}(\hat{S})$ as defined above. There exists universal constants $c_i >0$, i = 1,2,$\cdots$,5 such that for $J = \big\lfloor c_1\epsilon^{-\frac{1}{s}}\big\rfloor$ and for $t \geq 0$, one has : 
     \begin{align}
         \E[\sep(\hat{S})] + \frac{c_2}{\sqrt{n}} &\geq \frac{c_3 \epsilon^2}{\epsilon + \sqrt{\frac{J}{n}}} \\
         \P\Biggl(\Big|\sep(\hat{S})-\E \sep(\hat{S}) \Big| \geq t+ \frac{c_4}{\sqrt{n}}\Biggr) &\leq 2 \exp(-c_5nt^2)
     \end{align}
 \end{lemma}
-\textcolor{red}{Add proof}
+\begin{proof}[Proof of \Cref{lemma13gerber}]
+    Let $\norm{\cdot}, \scal{\cdot}{\cdot}$ for the $\l^2$ norm/inner product restricted to the first $J$ coordinates. Notice that given $\hat{\theta}^X,\hat{\theta}^Y$, $T(\theta)$ is a Gaussian random variable with : 
+    \begin{equation*}
+        \E T(\theta) = \normp[2]{\hat{\theta}^Y - \theta} - \normp[2]{\hat{\theta}^X-\theta}  \ \text{ and } \ \var{T} = 4 \normp[2]{\hat{\theta}^X-\hat{\theta}^Y}
+    \end{equation*}
+    Now, define the random vectors $U,V$ as follows : 
+    \begin{align*}
+        U &= \bigl\{ \hat{\theta}^X_j - \hat{\theta}^Y_j\bigr\}_{j=1}^J \\
+        V &= \bigl\{\hat{\theta}^X_j + \hat{\theta}^Y_j\bigr\}_{j=1}^J
+    \end{align*}
+    One can easily see that these two vectors are independent, Gaussians with covariance matrix $\frac{2}{n}I_J$ and means equal to the first $J$ coordinates of $\theta^X \minusplus \theta^Y$ respectively. Let $\Phi$ be the cumulative distribution function of the standard Gaussian and $\phi$ be its density.
+    It can be shown that the separation can be written as : \begin{equation*}
+        \sep(\hat{S}) = f(\hat{\theta}^X)- f(\hat{\theta}^Y)
+    \end{equation*}
+    Where $f$ is defined as follows : 
+    \begin{equation*}
+        f(\theta) = \Phi\Bigg( \frac{\normp[2]{\hat{\theta}^Y -\theta}-\normp[2]{\hat{\theta}^X -\theta}}{2\normp[2]{\hat{\theta}^X -\hat{\theta}^Y}} \Bigg) = \Phi\Bigg(-\frac{1}{2}\bigscal{V}{\frac{U}{\norm{U}}} + \bigscal{\theta}{\frac{U}{\norm{U}}}\Bigg)
+    \end{equation*}
+    In order to make the dependences more clear, write $g(U,V) = f(\theta^X)-f(\theta^Y)$. Now, differentiating $g$ and using the fact that $\phi$ is $\frac{1}{\sqrt{2\pi e}}$-Lipschitz yields : 
+    \begin{align*}
+        \norm{\nabla_V g(U,V)}  &= \begin{aligned}[t]
+            \bignorm{&-\frac{1}{2}\frac{U}{\norm{U}}\Bigg(\phi\Bigl( -\frac{1}{2}\bigscal{V}{\frac{U}{\norm{U}}} + \bigscal{\theta^X}{\frac{U}{\norm{U}}} \Bigr)\\
+            &- \phi\Bigl(-\frac{1}{2}\bigscal{V}{\frac{U}{\norm{U}}} + \bigscal{\theta^Y}{\frac{U}{\norm{U}}} \Bigr) \Bigg)}
+        \end{aligned}\\
+        & \leq \frac{1}{\sqrt{8\pi e}} \Big|\bigscal{\theta^X-\theta^Y}{\frac{U}{\norm{U}}} \Big| \\ 
+        & \leq \frac{C}{\sqrt{8 \pi e}}
+    \end{align*}
+    By Lipschitz concentration of Gaussian random variable (\Cref{LipschitzConc}), one can conclude that $g - \E[g|U]$ is sub-Gaussian with variance proxy $\frac{C^2}{4\pi en}$. Now, we study the concentration of $\E[g|U]$. First, note that : \begin{equation*}
+        -\frac{1}{2} \bigscal{V}{\frac{U}{\norm{U}}} + \bigscal{\theta}{\frac{U}{\norm{U}}} \Bigg| U \sim \mathcal{N}\Biggl(\bigscal{\theta-\frac{1}{2}(\theta^X+\theta^Y)}{\frac{U}{\norm{U}}},\frac{1}{2n} \Biggr)
+    \end{equation*}
+    Then, using the independence of $U,V$ and \cref{gaussianexpec}, we obtain : \begin{align*}
+        \E[g(U,V)|U] &= \E[f(\theta^X)-f(\theta^Y)|U] \\ 
+        &= \Phi\Biggl(\frac{W}{\sqrt{4+\frac{2}{n}}}\Biggr)-\Phi\Biggl(-\frac{W}{\sqrt{4+\frac{2}{n}}}\Biggr)
+    \end{align*}
+    Where $W \coloneqq \scal{\theta^X-\theta^Y}{\frac{U}{\norm{U}}}$. To simplify notations, let $\varphi \coloneqq \Phi\Bigl(\frac{\cdot}{\sqrt{4+\frac{2}{n}}}\Bigr)$, by Lipschitness of $\Phi$, we obtain that for $t \geq 0$: \begin{align*}
+        \P\Bigl( \Big|\varphi(W)-\E\varphi(W) \Big| \geq t\Bigr) &\leq \P\Bigl(\Bigr) \textcolor{red}{Finish the proof}
+    \end{align*}
 \begin{lemma}
     W is a sub-Gaussian random variable with variance proxy $\frac{1}{2n}$
 \end{lemma}
 \textcolor{blue}{Proof in the appendix}
-
+\end{proof}
 \begin{proof}[Proof of \Cref{CATperf}]
     \textcolor{red}{Add proof}
 \end{proof}
