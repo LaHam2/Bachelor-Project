@@ -20,7 +20,24 @@
     \end{equation*}
     Then, one can decompose $W$ as follows : 
     \begin{equation*}
-        \bigscal{\tau}{\frac{\tau +\sigma Q}{\norm{\tau +\sigma Q}}} = \bigscal{\frac{\tau}{\E \big(\norm{tau}\big)}}{}
+        \bigscal{\tau}{\frac{\tau +\sigma Q}{\norm{\tau +\sigma Q}}} = \bigscal{\frac{\tau}{\E \big(\norm{\tau}\big)}}{}
     \end{equation*}
     \textcolor{red}{Correct the proof}
 \end{proof}
+\subsection{Proof of Lipschitz concentration for Gaussians}
+Firstly, note that we can restrict ourselves to smooth Lipschitz functions. Explicitely, if $f$ is an $L$-Lipschitz function, one can consider its mollification $f_\epsilon = f * \eta_\epsilon$ where $\eta$ is the standard mollifier.
+ Moreover $f_\epsilon$ is smooth and converges uniformly on compact sets to $f$ as $\epsilon \rightarrow 0$. Now, we want to show the sub-Gaussianity of $f(Z)$ where $f : \R^d \rightarrow \R$ is an $L$-Lipschitz smooth function and $Z$ is a standard Gaussian.
+This can be done using the Gaussian log-Sobolev inequality, which we will state in the following form : 
+\begin{lemma}[Gaussian log-Sobolev inequality]\label{logsobolev}
+    Let $\gamma_d$ be the standard d-dimensional Gaussian measure and consider a smooth function $g:\R^n \rightarrow \R$ such that $g,\nabla g \in L^2(\gamma_d)$.
+    Now, define the entropy of $g$ relative to $\gamma_d$ as follows : 
+    \begin{equation*}
+        \text{Ent}_{\gamma_d} \coloneqq \E_{\gamma_d}[g \log(g)] - \E_{\gamma_d}[g]\E_{\gamma_d}[\log(g)]
+    \end{equation*}
+    with the convention $0 \log(0) = 0$.\\
+    Then, one has that : 
+    \begin{equation}\label{logsob}
+        \text{Ent}_{\gamma_d} (g^2) \leq 2\E_{\gamma_d}[\norm{\nabla_g}^2] \tag{Log-Sobolev}
+    \end{equation}
+    \textcolor{red}{Complete proof}
+\end{lemma}
