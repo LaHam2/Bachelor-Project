@@ -32,12 +32,12 @@ This can be done using the Gaussian log-Sobolev inequality, which we will state 
     Let $\gamma_d$ be the standard d-dimensional Gaussian measure and consider a smooth function $g:\R^n \rightarrow \R$ such that $g,\nabla g \in L^2(\gamma_d)$.
     Now, define the entropy of $g$ relative to $\gamma_d$ as follows : 
     \begin{equation*}
-        \text{Ent}_{\gamma_d} \coloneqq \E_{\gamma_d}[g \log(g)] - \E_{\gamma_d}[g]\E_{\gamma_d}[\log(g)]
+        \text{Ent}_{\gamma_d}(g) \coloneqq \E_{\gamma_d}[g \log(g)] - \E_{\gamma_d}[g]\E_{\gamma_d}[\log(g)]
     \end{equation*}
     with the convention $0 \log(0) = 0$.\\
     Then, one has that : 
     \begin{equation}\label{logsob}
-        \text{Ent}_{\gamma_d} (g^2) \leq 2\E_{\gamma_d}[\norm{\nabla_g}^2] \tag{Log-Sobolev}
+        \text{Ent}_{\gamma_d} (g^2) \leq 2\E_{\gamma_d}[\norm{\nabla  g}^2] \tag{Log-Sobolev}
     \end{equation}
     \textcolor{red}{Complete proof}
 \end{lemma}
