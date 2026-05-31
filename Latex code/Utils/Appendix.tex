@@ -28,16 +28,98 @@
 Firstly, note that we can restrict ourselves to smooth Lipschitz functions. Explicitely, if $f$ is an $L$-Lipschitz function, one can consider its mollification $f_\epsilon = f * \eta_\epsilon$ where $\eta$ is the standard mollifier.
  Moreover $f_\epsilon$ is smooth and converges uniformly on compact sets to $f$ as $\epsilon \rightarrow 0$. Now, we want to show the sub-Gaussianity of $f(Z)$ where $f : \R^d \rightarrow \R$ is an $L$-Lipschitz smooth function and $Z$ is a standard Gaussian.
 This can be done using the Gaussian log-Sobolev inequality, which we will state in the following form : 
-\begin{lemma}[Gaussian log-Sobolev inequality]\label{logsobolev}
-    Let $\gamma_d$ be the standard d-dimensional Gaussian measure and consider a smooth function $g:\R^n \rightarrow \R$ such that $g,\nabla g \in L^2(\gamma_d)$.
-    Now, define the entropy of $g$ relative to $\gamma_d$ as follows : 
-    \begin{equation*}
-        \text{Ent}_{\gamma_d}(g) \coloneqq \E_{\gamma_d}[g \log(g)] - \E_{\gamma_d}[g]\E_{\gamma_d}[\log(g)]
-    \end{equation*}
-    with the convention $0 \log(0) = 0$.\\
-    Then, one has that : 
-    \begin{equation}\label{logsob}
-        \text{Ent}_{\gamma_d} (g^2) \leq 2\E_{\gamma_d}[\norm{\nabla  g}^2] \tag{Log-Sobolev}
-    \end{equation}
-    \textcolor{red}{Complete proof}
+
+Let $\gamma_n$ denote the standard Gaussian measure on $\R^n$, that is, the law
+of $X \sim \N(0, I_n)$. We write $\E$ for expectation under $\gamma_n$ and
+$\norm{\cdot}_2$ for the Euclidean norm. For a nonnegative measurable function
+$h$ with $\E[h]<\infty$ and $\E[h\log h] < \infty$, the \emph{entropy of $h$
+relative to $\gamma_n$} is
+\[
+    \text{Ent}_{\gamma_n}(h) \coloneqq \E[h \log h] - \E[h] \log \E[h],
+\]
+with the convention $0\log 0 = 0$.
+
+\begin{lemma}[Gaussian logarithmic Sobolev inequality]
+\label{lem:lsi}
+For every smooth function $g \colon \R^n \to \R$ with $g, \nabla g \in L^2(\gamma_n)$,
+\[
+    \text{Ent}_{\gamma_n}\!\bigl( g^2 \bigr) \le 2\, \E\!\bigl[\, \norm{\nabla g}_2^2 \,\bigr] .
+\]
 \end{lemma}
+
+
+\begin{lemma}[Herbst argument]
+\label{lem:herbst}
+Let $f \colon \R^n \to \R$ be smooth with $\norm{\nabla f(x)}_2 \le L$ for every
+$x \in \R^n$. Then for every $\lambda \in \R$,
+\[
+    \E\!\Bigl[\, e^{\lambda\,(f(X) - \E f(X))} \,\Bigr] \le \exp\!\left( \frac{\lambda^2 L^2}{2} \right) .
+\]
+\end{lemma}
+
+\begin{lemma}[Chernoff bound for sub-Gaussian variables]
+\label{lem:chernoff}
+Let $Y$ be a real-valued random variable satisfying
+$\E[e^{\lambda Y}] \le \exp\!\bigl( \lambda^2 \sigma^2 / 2 \bigr)$ for all
+$\lambda > 0$. Then for every $t > 0$,
+\[
+    \P(Y \ge t) \le \exp\!\left( -\frac{t^2}{2\sigma^2} \right) .
+\]
+\end{lemma}
+
+\begin{theorem}[Gaussian Lipschitz concentration]
+\label{thm:main}
+Let $X \sim \N(0, I_n)$ and let $f \colon \R^n \to \R$ be $L$-Lipschitz. Then for
+every $t > 0$,
+\[
+    \P\!\bigl( f(X) - \E f(X) \ge t \bigr) \le \exp\!\left( -\frac{t^2}{2L^2} \right) ,
+\]
+and consequently
+\[
+    \P\!\bigl( |{f(X) - \E f(X)}|\ge t \bigr) \le 2\exp\!\left( -\frac{t^2}{2L^2} \right) .
+\]
+The bound is independent of the dimension $n$.
+\end{theorem}
+
+\begin{proof}
+By the smoothing reduction (i.e. the reduction to smooth Lipschitz functions) it suffices to prove the
+inequality under the additional assumption that $f$ is smooth and satisfies
+$\norm{\nabla f(x)}_2 \le L$ for every $x \in \R^n$, since the tail probability
+in the conclusion is upper semicontinuous with respect to the pointwise
+convergence $f_k \to f$.
+
+Define the centered random variable
+\[
+    Y \coloneqq f(X) - \E f(X) ,
+\]
+so that $\E Y = 0$. The Herbst argument (Lemma~\ref{lem:herbst}), whose proof
+relies on the Gaussian logarithmic Sobolev inequality (Lemma~\ref{lem:lsi}),
+asserts that
+\[
+    \E\!\bigl[\, e^{\lambda Y} \,\bigr] \le \exp\!\left( \frac{\lambda^2 L^2}{2} \right)
+    \qquad \text{for every } \lambda \in \R .
+\]
+In other words, $Y$ is sub-Gaussian with variance proxy $\sigma^2 = L^2$.
+
+Applying the Chernoff bound (Lemma~\ref{lem:chernoff}) with $\sigma^2 = L^2$ then
+yields, for every $t > 0$,
+\[
+    \P\!\bigl( f(X) - \E f(X) \ge t \bigr) = \P(Y \ge t) \le \exp\!\left( -\frac{t^2}{2L^2} \right) ,
+\]
+which establishes the upper-tail bound.
+
+For the lower tail, observe that $-f$ is also $L$-Lipschitz, and that
+$\E(-f)(X) = -\E f(X)$. Applying the upper-tail bound just established to $-f$ in
+place of $f$ gives
+\[
+    \P\!\bigl( f(X) - \E f(X) \le -t \bigr)
+    = \P\!\bigl( (-f)(X) - \E(-f)(X) \ge t \bigr)
+    \le \exp\!\left( -\frac{t^2}{2L^2} \right) .
+\]
+Combining the two tail bounds via a union bound,
+\[
+    \P\!\bigl( \abs{f(X) - \E f(X)} \ge t \bigr) \le 2\exp\!\left( -\frac{t^2}{2L^2} \right) .
+\]
+None of the steps above involved any dependence on the dimension $n$, so the
+estimate is dimension-free.
+\end{proof}
