@@ -1,3 +1,4 @@
+% !TEX root = main.tex
 \section{Some omitted proofs}
 \begin{proof}[Proof of \Cref{sixseven}]
     We will prove the LHS inequality, the RHS can be proven in the exact same way : \begin{align*}
@@ -14,13 +15,13 @@
     The last equality is given by the fact that $\frac{Z'-aZ}{\sqrt{1+a^2}} \sim \mathcal{N}(0,1)$.
 \end{proof}
 \begin{proof}[Proof of \Cref{youssef}]
-    Let $\tau \coloneqq \theta^X - \theta^Y$ and $\sigma^2 ) \frac{1}{2n}$ and let $Q$ be a standard Gaussian random vector such that : 
+    Let $\tau \coloneqq \theta^X - \theta^Y$ and $\sigma^2  \frac{1}{2n}$ and let $Q$ be a standard Gaussian random vector such that : 
     \begin{equation*}
         W =  \bigscal{\tau}{\frac{\tau+\sigma Q}{\norm{\tau+\sigma Q}}} \ \text{ in distribution }
     \end{equation*}
     Then, one can decompose $W$ as follows : 
     \begin{equation*}
-        \bigscal{\tau}{\frac{\tau +\sigma Q}{\norm{\tau +\sigma Q}}} = \bigscal{\frac{\tau}{\E \big(\norm{\tau}\big)}}{}
+        \bigscal{\tau}{\frac{\tau +\sigma Q}{\norm{\tau +\sigma Q}}} = \bigscal{\frac{\tau}{\E \big(\norm{\tau}\big)}}{ss}
     \end{equation*}
     \textcolor{red}{Correct the proof}
 \end{proof}
@@ -118,7 +119,7 @@ place of $f$ gives
 \]
 Combining the two tail bounds via a union bound,
 \[
-    \P\!\bigl( \abs{f(X) - \E f(X)} \ge t \bigr) \le 2\exp\!\left( -\frac{t^2}{2L^2} \right) .
+    \P\!\bigl( |f(X) - \E f(X)| \ge t \bigr) \le 2\exp\!\left( -\frac{t^2}{2L^2} \right) .
 \]
 None of the steps above involved any dependence on the dimension $n$, so the
 estimate is dimension-free.

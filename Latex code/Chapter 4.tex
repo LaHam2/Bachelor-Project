@@ -284,3 +284,41 @@ Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound 
  Combining the two points above yields the inequality.
 \end{proof}
 
+Now that we have all the necessary tools, we will prove the main theorem of this chapter. We will split this proof into many parts : 
+\begin{prop}\label{param}
+    There exists a constant $K_0$ such that for every $\epsilon$ small enough, \begin{equation}\label{parameq}
+        n(\epsilon,\delta,\mathcal{P}_G(s,C_G)) \geq K_0 \frac{log(1/\delta)}{\epsilon^2}
+    \end{equation}
+\end{prop}
+\begin{proof}[Proof of \Cref{samplecomplexitythm}] \cite{gerberclas}
+    For a vector $\eta \in \{-1,1\}^\N$, define the following probability measure : 
+    \begin{equation}\label{randomproba}
+        \P_\eta \coloneqq \bigotimes_{j=1}^J \mathcal{N}(\eta_jc_1 \epsilon^{\frac{2s+1}{2s}},1) \otimes \bigotimes_{j>J} \mathcal{N}(0,1)
+    \end{equation}
+    Where $J = \big\lfloor c_2\varepsilon^{-\frac{1}{s}}\big\rfloor$. And let $\eta_1,\eta_2,\cdots$ be iid uniform in $\{-1,1\}$ and $\gamma_\eta$ be the mean vector of $\P_\eta$. One can see that for any such $\eta$ : 
+    \begin{align*}
+        \norm{\gamma_\eta}_s^2 = \sum_{j=1}^{\infty} j^{2s}\gamma_{\eta,j}^2 = \sum_{j=1}^{J}j^{2s}c^2\epsilon^{\frac{2s+1}{s}} &\leq c_1^2 \epsilon^{\frac{2s+1}{s}} \bigl( 2c_2\epsilon^{-\frac{1}{s}} \bigr)^{2s+1} \asymp c_1^2c_2^{2s+1}\\
+        \normp[2]{\gamma_\eta} &= \sum_{j=1}^{\infty} \gamma_{\eta,j}^2 \asymp c_1^2c_2\epsilon^2
+    \end{align*}
+    Then for $C_G >0$ (Size of Sobolev's ellipsoid) fixed, one can choose $c_1,c_2$ independently of $\epsilon$ such that $\P_0,\P_\eta \in \mathcal{P}_G(s,C_G)$ almost surely and $\norm{\gamma_\eta} = 10\epsilon$. 
+    Then, for $\epsilon \leq \frac{1}{10}$, one has : 
+    \begin{equation*}
+        TV(\P_0,\P_\eta) = 2 \Phi\Biggl(\frac{\norm{\gamma_\eta}}{2}\Biggr) - 1 \geq \epsilon
+    \end{equation*}
+    Now, take $P_0 = \P_0^{\otimes2n}, P_1 = \P_1^{\otimes n} \otimes \P_0^{\otimes n}$, then : \begin{equation*}
+        KL(P_0\Vert P_1) = n KL(\P_0 \Vert \P_1) = nc_2 \epsilon^{-\frac{1}{s}}\frac{(c_1 \epsilon^{\frac{2s+1}{2s}})^2}{2} = K n\epsilon^2
+    \end{equation*}
+    Using \Cref{rubignolle} and \Cref{lowerbounderror}, we get the minimax error is at least : \begin{equation*}
+        \frac{1}{2}\bigl(1-TV(P_0,P_1) \bigr)\geq \frac{1}{4}\exp(-KL(P_0\Vert P_1)) = \frac{1}{4}\exp(-Kn\epsilon^2) 
+    \end{equation*}
+    For this error to be less than $\delta$, it is necessary to have : \begin{equation*}
+        \frac{1}{4}\frac{1}{4}\exp(-Kn\epsilon^2) \leq \delta \Leftrightarrow n \geq \frac{\log(1/(4\delta))}{K\epsilon^2}
+    \end{equation*}
+    Hence $n \gtrsim \frac{\log(1/\delta)}{\epsilon^2}$ as claimed.
+\end{proof}
+\begin{prop}\label{nonparam}
+    There exists a constant $K_1 >0$ such that for every $\epsilon$ small enough : 
+    \begin{equation}\label{nonparameq}
+        n(\epsilon,\delta,\mathcal{P}_G(s,C_G)) \geq K_1 \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}
+    \end{equation}
+\end{prop}
