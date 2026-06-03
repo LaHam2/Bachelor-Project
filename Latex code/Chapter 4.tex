@@ -59,7 +59,14 @@ The first term reflects the difficulty of nonparametric detection and depends on
 the second is a universal information-theoretic floor for binary testing at confidence $\delta$.
 The proof is developed in the following sections.
 
-
+\section{Preliminary results } 
+The hard part of this kind of frameworks consists in finiding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
+\begin{definition}
+    Let $S \subseteq \mx$ be a measurable set, and $\mu,\nu$ be two probability measures on $\mx$. We define the separation and size of $S$ respectively as follows : 
+    \begin{equation*}
+        \sep(S) = \mu(S)-\nu(S) \ \text{ and } \ \tau(S) = \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c))
+    \end{equation*}
+\end{definition}
 \begin{lemma}\label{lem:lemma1}\citet[Lemma~1]{gerberclas}\\
     Consider the hypothesis testing problem $\H_0 : p = q$ versus any other alternative $\H_1$. Suppose that the learner has constructed a separating set $S$ such that : 
     \begin{equation*}
