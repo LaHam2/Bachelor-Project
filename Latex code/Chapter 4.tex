@@ -285,12 +285,12 @@ Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound 
 \end{proof}
 
 Now that we have all the necessary tools, we will prove the main theorem of this chapter. We will split this proof into many parts : 
-\begin{prop}\label{param}
+\begin{prop}\label{param}\cite{gerberclas}
     There exists a constant $K_0$ such that for every $\epsilon$ small enough, \begin{equation}\label{parameq}
         n(\epsilon,\delta,\mathcal{P}_G(s,C_G)) \geq K_0 \frac{log(1/\delta)}{\epsilon^2}
     \end{equation}
 \end{prop}
-\begin{proof}[Proof of \Cref{samplecomplexitythm}] \cite{gerberclas}
+\begin{proof}[Proof of \Cref{param}] 
     For a vector $\eta \in \{-1,1\}^\N$, define the following probability measure : 
     \begin{equation}\label{randomproba}
         \P_\eta \coloneqq \bigotimes_{j=1}^J \mathcal{N}(\eta_jc_1 \epsilon^{\frac{2s+1}{2s}},1) \otimes \bigotimes_{j>J} \mathcal{N}(0,1)
@@ -316,9 +316,54 @@ Now that we have all the necessary tools, we will prove the main theorem of this
     \end{equation*}
     Hence $n \gtrsim \frac{\log(1/\delta)}{\epsilon^2}$ as claimed.
 \end{proof}
-\begin{prop}\label{nonparam}
+\begin{prop}\label{nonparam}\cite{gerberclas}
     There exists a constant $K_1 >0$ such that for every $\epsilon$ small enough : 
     \begin{equation}\label{nonparameq}
         n(\epsilon,\delta,\mathcal{P}_G(s,C_G)) \geq K_1 \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}
     \end{equation}
 \end{prop}
+\begin{proof}
+    Let $\eta$ be a sequence of iid uniform signs (i.e. with components from $\{-1,1\}$ uniformly), and define the following probability measures : 
+    \begin{equation*}
+    P_0 = \P_0^{\otimes 2n},P_1 = \P_0^{\otimes n}\otimes \P_\eta^{\otimes n}
+    \end{equation*} 
+    By the independence of the components of $\eta$ and their identical distribution, for $\omega=c_1 \epsilon^{\frac{2s+1}{2s}}$ the following mixture can be written as follows : 
+    \begin{equation*}
+        \E\P_\eta^{\otimes n} = \bigotimes_{j=1}^J \Biggl(\frac{1}{2}\mathcal{N}(\omega,1)^{\otimes n}+\frac{1}{2}\mathcal{N}(-\omega,1)^{\otimes n}\Biggr) \otimes \bigotimes_{j>J}\mathcal{N}(0,1)^{\otimes n}
+    \end{equation*}
+    In order to simplify notations, define $M_n \coloneqq\frac{1}{2}\mathcal{N}(\omega,1)^{\otimes n}+\frac{1}{2}\mathcal{N}(-\omega,1)^{\otimes n}$, hence : 
+    \begin{equation}\label{mixture}
+        KL(\P_0^{\otimes n} \Vert \E\P_\eta^{\otimes n}) = J\cdot KL(\mathcal{N}(0,1)^{\otimes n}\Vert M_n)
+    \end{equation}
+\begin{lemma}\label{klmixture}
+    For $\omega \in \R$ and $n \geq 1$ : 
+    \begin{equation}
+        KL\Biggl(\mathcal{N}(0,1)^{\otimes n}\bigg\Vert \frac{1}{2}\mathcal{N}(\omega,1)^{\otimes n} +\frac{1}{2}\mathcal{N}(-\omega,1)^{\otimes n} \Biggr) \leq \frac{n^2\omega^4}{4}
+    \end{equation}
+\end{lemma}
+\textcolor{red}{Proof in the appendix}\\
+By combining \Cref{mixture} and \Cref{klmixture}, we obtain : 
+\begin{equation*}
+    KL(\P_0^{\otimes n}\Vert \E\P_\eta^{\otimes n}) \leq J\cdot \frac{n^2\omega^4}{4} = \frac{n^2}{4}\cdot J\omega^2 \cdot \omega^2
+\end{equation*}
+But $J\omega^2= \normp[2]{\gamma_\eta} = 100\epsilon^2$ and $\omega^2 = c_1^2 \epsilon^{\frac{2s+1}{s}}$ hence : 
+\begin{equation*}
+    KL(\P_0^{\otimes n}\Vert \E\P_\eta^{\otimes n}) \leq \frac{100c_1^2}{4}n^2 \epsilon^{\frac{4s+1}{s}} = \kappa \cdot n^2 \epsilon^{\frac{4s+1}{s}}
+\end{equation*}
+Now, by combining \Cref{lowerbounderror} and \Cref{rubignolle}, in order to get an error less than $\delta$, we need to have : 
+\begin{equation*}
+    \kappa n^2\epsilon^{\frac{4s+1}{s}} \geq \log\Bigl(\frac{1}{4\delta}\Bigr)
+\end{equation*}
+Which yields $n \gtrsim \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}$
+\end{proof}
+
+\begin{proof}[Proof of \Cref{samplecomplexitythm}]
+    Using \Cref{param} and \Cref{nonparam}, we get that there exists two constants $K_0,K_1 >0$ such that \Cref{parameq} and \Cref{nonparameq} hold true. 
+    Now, let $K = \min \{K_0,K_1\}$. One has : 
+    \begin{align*}
+        n &\geq \max\Biggl\{K_0 \frac{\log(1/\delta)}{\epsilon^2},K_1 \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}\Biggr\}\\ 
+        &\geq \max\Biggl\{K \frac{\log(1/\delta)}{\epsilon^2},K \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}\Biggr\}\\ 
+        &\geq \frac{K}{2}\Biggl(\frac{\log(1/\delta)}{\epsilon^2}+\frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}\Biggr)
+    \end{align*}
+
+\end{proof}
