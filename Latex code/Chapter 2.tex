@@ -70,9 +70,9 @@ One can also define the following quantities :
     \beta(\alpha,\mp_0,\mp_1)&= \inf_{\psi\in \Psi_{\alpha,\mp_0}} \beta(\psi,\mp_0,\mp_1)  \label{minimaxalpha}
 \end{align}
 The tests $\psi^{(t)}$ or $\psi_\alpha$ are called \textit{minimax} if they provide infimums for \cref{minimaxt} or \cref{minimaxalpha}. \\ 
-\newpage
+
 One can observe the following convexity lemma : 
-\begin{lemma}\label{conv}
+\begin{lemma}\label{conv}\citet[Lemma 2.3]{Ing2012}
     The following properties hold true : 
     \begin{enumerate}
         \item The functions $\alpha(\psi,\mp_0),\beta(\psi,\mp_1),\gamma_t(\psi,\mp_0,\mp_1)$ are convex in $\psi\in\Psi$
@@ -82,7 +82,7 @@ One can observe the following convexity lemma :
         \end{equation}
     \end{enumerate}
 \end{lemma}
-\textcolor{red}{Maybe add a proof}
+
 \subsection{Connection with Bayesian approach}
 Now that the settings of both Minimax and Bayesian approaches were explored, we will see that there exists a close relation between these two. All the following statements go back to \citet{Wald1950-WALSDF-3}
 \begin{definition}[$L_1$ distance between two families of measures]
@@ -92,8 +92,8 @@ Now that the settings of both Minimax and Bayesian approaches were explored, we 
     Moreover, we define $[A]$ to be the convex hull of $A$.
 \end{definition}
 
-\begin{theorem}\label{thm2.1}
-    \textcolor{red}{Add some text}
+\begin{theorem}\label{thm2.1}\citet[Theorem 2.1]{Ing2012}
+    \leavevmode
     \begin{enumerate}
         \item The following inequalities hold true : 
         \begin{align}
@@ -105,9 +105,6 @@ Now that the settings of both Minimax and Bayesian approaches were explored, we 
         \item If $\mp_0,\mp_1$ are compact with respect to the total varation distance. Then, there exists pairs of priors $\pi_{0,t},\pi_{1,t}$ and $\pi_{0,\alpha},\pi_{1,\alpha}$ such that the minimax tests $\psi^{(t)}, \psi_\alpha$ are optimal tests for testing the simple hypothesis $P_{\pi_{0,t}}$ or $P_{\pi_{0,\alpha}}$ against the simple alternative $P_{\pi_{1,t}}$, or $P_{\pi_{1,\alpha}}$. The priors $\pi_{0,t},\pi_{1,t}$ and $\pi_{0,\alpha},\pi_{1,\alpha}$ are called least favourable.
     \end{enumerate}
 \end{theorem}
-\begin{proof}
-    \textcolor{red}{ADD PROOF}
-\end{proof}
 We will use the previous inequalities \ref{ineqgamma},\ref{ineqbeta} in order to construct some lower bounds for the quantities $\gamma(t), \beta(\alpha),\gamma$. For example, let $\pi_{0,n},\pi_{1,n}$ be sequences of priors such that : 
 \begin{equation}\label{condpriors}
     \pi_{0,n}(\mp_0) = \pi_{1,n}(\mp_1) = 1
@@ -127,7 +124,37 @@ One can see that this can be also true if $ \pi_{0,n}(\mp_0) \rightarrow 1$ and 
     Then, the inequalities \ref{limsupgamma}, \ref{limsupbeta} and \ref{limsupgamma1} hold true. 
 \end{prop}
 \begin{proof}
-    \textcolor{red}{Add proof prop 2.9 IngSus}
+Let us consider conditional priors
+\[
+  \tilde\pi_{0,n} = \pi_{0,n;\mathcal{P}_0}, \qquad
+  \tilde\pi_{1,n} = \pi_{1,n;\mathcal{P}_1},
+\]
+defined by
+\[
+  \pi_B(A) = \pi(A \cap B)/\pi(B); \qquad \pi_B(B) = 1,
+\]
+and
+\begin{align}
+  |\pi_B - \pi|_1
+    &= \int_B |\pi_B(dP) - \pi(dP)| + \pi(\bar B)
+     = \int_B \frac{1 - \pi(B)}{\pi(B)}\,\pi(dP) + \pi(\bar B) \notag\\
+    &= \frac{1 - \pi(B)}{\pi(B)}\,\pi(B) + \pi(\bar B)
+     = 2\bigl(1 - \pi(B)\bigr),
+     \label{eq:2.49}
+\end{align}
+where $\bar B$ is the complement of $B$. By continuity $\gamma(t; \mathcal{P}_0, \mathcal{P}_1)$,
+$\beta(\alpha; \mathcal{P}_0, \mathcal{P}_1)$ on $\mathcal{P}_0, \mathcal{P}_1$
+(see Proposition~2.1), it suffices to check that
+\[
+  |P_{\tilde\pi_{l,n}} - P_{\pi_{l,n}}|_1 \to 0, \qquad l = 0, 1.
+\]
+The last relation follows from \textcolor{red}{Add eq 2.32}:
+\[
+  |P_{\tilde\pi_{l,n}} - P_{\pi_{l,n}}|_1
+    \;\leq\; |\tilde\pi_{l,n} - \pi_{l,n}|_1
+    \;=\; 2\bigl(1 - \pi_{l,n}(\mathcal{P}_l)\bigr)
+    \;\to\; 0, \qquad l = 0, 1.
+\]
 \end{proof}
 \begin{theorem}\citet[Theorem 2.3]{Ing2012}\\
     Let $\pi_0,\pi_1$ be priors, and let $S_0 \subseteq \mp_0, S_1 \subseteq \mp_1$ be measurable sets such that $\pi_0(S_0) = \pi_1(S_1) = 1$. Moreover, assume that the Bayesian tests $\psi^{t}$ or $\psi_{\alpha}$ satisfy for $P_0 \in \mp_0,P_1 \in \mp_1$ : 
@@ -138,5 +165,15 @@ One can see that this can be also true if $ \pi_{0,n}(\mp_0) \rightarrow 1$ and 
     Then, $(\pi_0,\pi_1)$ is a pair of least favourable priors under the criteria $\gamma(t)$ or $\beta(\alpha)$, and the tests $\psi^{(t)}$ or $\psi_\alpha$ are minimax. 
 \end{theorem}
 \begin{proof}
-    \textcolor{red}{Add proof .}
+Consider the criterion $\beta(\alpha)$ (considerations for the criterion $\gamma(t)$ are
+analogous). It is clear that $\psi_\alpha \in \Psi_\alpha$,
+$\beta(\psi_\alpha, \pi_1) = \beta(\psi_\alpha, \mathcal{P}_1)$. Let $\psi' \in \Psi_\alpha$.
+Then, since the average value is no larger than the maximum value, one has
+$\alpha(\psi', \pi_0) \leq \alpha(\psi', \mathcal{P}_0) \leq \alpha$ and, since the
+average value is no smaller than the minimum value, one has
+\[
+  \beta(\psi', \mathcal{P}_1) \;\geq\; \beta(\psi', \pi_1) \;\geq\; \beta(\alpha, \pi_1)
+    \;=\; \beta(\psi_\alpha, \pi_1) \;=\; \beta(\psi_\alpha, \mathcal{P}_1).
+\]
 \end{proof}
+In particular, this theorem helps us to obtain the minimaxity of $\chi^2$ tests. However, it is impossible to extend this example to the infinite dimensional case

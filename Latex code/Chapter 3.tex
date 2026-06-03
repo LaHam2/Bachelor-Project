@@ -70,7 +70,7 @@ The problem that occurs often is that it is difficult to compute the total varia
     \end{equation}
 \end{definition}
 Below, we will assume that $P_{\epsilon,0}$ dominates all the other measures $P_{\epsilon,\theta}$ for $\theta \in \Theta$ (This is fulfilled in the Gaussian sequence model)
-\begin{prop}[$\chi^2$ nondistinguishability]
+\begin{prop}[$\chi^2$ nondistinguishability]\citet[Prop. 2.12]{Ing2012}
     \noindent
     \begin{itemize}
         \item Let $|P_{\epsilon,1}-P_{\epsilon,0}|_{2} \rightarrow 0$. Then $TV(P_{\epsilon,0},P_{\epsilon,1}) \rightarrow 0$ and $\gamma_\epsilon(P_{\epsilon,0},P_{\epsilon,1}) \rightarrow 0$.
@@ -78,7 +78,27 @@ Below, we will assume that $P_{\epsilon,0}$ dominates all the other measures $P_
     \end{itemize}
 \end{prop}
 \begin{proof}
-    \textcolor{red}{Add proof}
+The first statement follows from the inequality
+\[
+  |P_1 - P_0|_1 = E_{P_0}|L - 1| \leq \bigl(E_{P_0}|L - 1|^2\bigr)^{1/2} = |P_1 - P_0|_2.
+\]
+Let us establish the inequality
+\begin{equation}\label{eq:2.58}
+  |P_1 - P_0|_2 \geq |P_1 - P_0|_1 / 2\bigl(1 - \tfrac{1}{2}|P_1 - P_0|_1\bigr)^{1/2},
+\end{equation}
+which yields the second statement. Let us consider the optimal test $\psi = \psi^{(1)} =
+\mathbf{1}_{\{L > 1\}}$ for testing $H_0 : P = P_0$ against $H_1 : P = P_1$. By~\eqref{eq:2.22}
+we have
+\[
+  \gamma(\psi) = \gamma(P_0, P_1) = 1 - \tfrac{1}{2}|P_1 - P_0|_1 = 1 - E_{P_0}(L - 1)\psi.
+\]
+Then~\eqref{eq:2.58} follows from relations
+\begin{align*}
+  \tfrac{1}{2}|P_1 - P_0|_1
+   &= E_{P_0}(L - 1)\psi \leq \bigl(E_{P_0}|L - 1|^2\bigr)^{1/2}\bigl(E_{P_0}\psi^2\bigr)^{1/2} \\
+   &= |P_1 - P_0|_2\, \alpha^{1/2}(\psi) \leq |P_1 - P_0|_2\, \gamma^{1/2}(\psi) \\
+   &= |P_1 - P_0|_2\bigl(1 - \tfrac{1}{2}|P_1 - P_0|_1\bigr)^{1/2}.
+\end{align*}
 \end{proof}
 \subsection{Separation radius and goodness-of-fit}
 In Goodness-of-Fit problems (i.e. $\Theta_{\epsilon,1} = \Theta_{\epsilon,0}^C$ in \Cref{hyptest}), it is impossible to use directly minimax approach because : 
@@ -114,7 +134,7 @@ In the context of the definition above, set : \begin{equation*}
     h_\epsilon(v) = \sum_{i \in \N} w_{\epsilon,i}v_i^2; \ t_\epsilon(v) = t_\epsilon - h_\epsilon(v); \ |w_\epsilon| = \sup_{i \in \N} w_{\epsilon,i}
 \end{equation*}
 Under the null hypothesis, one can note that $\E_0 t_\epsilon$, moreover, one can assume the normalization $\sum w_{\epsilon,i}^2 = \frac{1}{2}$ in order to ensure that $\var{t_\epsilon}= 1$
-\begin{lemma}[Minimax properties of $\chi^2$-type tests]\citet{Ing2012}
+\begin{lemma}[Minimax properties of $\chi^2$-type tests]\citet[Lemma 3.1 \& Corollary 3.3]{Ing2012}\\
     Assume that the family $w_\epsilon$ satisfies $w_{\epsilon,i} \geq 0$ as well as the normalization above. Then : \begin{equation}\label{chi2minimax1}
         \text{Var}_v(t_\epsilon) \leq 1 + 4 |w_\epsilon| h_\epsilon(v)
     \end{equation}
@@ -125,6 +145,119 @@ Under the null hypothesis, one can note that $\E_0 t_\epsilon$, moreover, one ca
     \end{equation*}
 \end{lemma}
 \begin{proof}
-    \textcolor{red}{ADD PROOF}
-\end{proof}
+The proof combines Lemma~3.1 of Ingster--Suslina (giving the variance bound and asymptotic
+normality of $t_\varepsilon$) with Corollary~3.3 (giving the minimax error bounds), the
+latter itself drawing on Corollaries~3.1--3.2.
 
+\medskip\noindent\textbf{Variance bound \eqref{eq:3.4}.}
+Under $P_v$ we have $X_i = \eta_i + v_i$ with $\eta_i \sim N(0,1)$ i.i.d.\ Writing
+$x = \eta + t$ with $\eta \sim N(0,1)$, $t \in \mathbb{R}$, a direct calculation gives
+\begin{equation}\label{eq:3.11}
+  E(x^2) = 1 + t^2, \quad \operatorname{Var}(x^2) = 2 + 4t^2, \quad
+  E\bigl((x^2 - E x^2)^4\bigr) \leq c(1 + t^4),
+\end{equation}
+where $c$ is an absolute constant. Applying \eqref{eq:3.11} coordinatewise and using the
+independence of the $X_i$,
+\[
+  E_v t_\varepsilon = \sum_i w_{\varepsilon,i}\, v_i^2 = h_\varepsilon(v),
+  \qquad
+  \operatorname{Var}_v(t_\varepsilon)
+   = \sum_i w_{\varepsilon,i}^2\,(2 + 4 v_i^2)
+   = 1 + 4\sum_i w_{\varepsilon,i}^2\, v_i^2,
+\]
+using the normalization $\sum_i w_{\varepsilon,i}^2 = 1/2$. Since
+$w_{\varepsilon,i}^2 v_i^2 \leq |w_\varepsilon|\, w_{\varepsilon,i} v_i^2$, we get
+\[
+  \operatorname{Var}_v(t_\varepsilon)
+   \;\leq\; 1 + 4|w_\varepsilon|\sum_i w_{\varepsilon,i}\, v_i^2
+   \;=\; 1 + 4|w_\varepsilon|\, h_\varepsilon(v),
+\]
+which is~\eqref{eq:3.4}.
+
+\medskip\noindent\textbf{Asymptotic normality of $t_\varepsilon(v)$.}
+Set $\xi_{\varepsilon,i} = w_{\varepsilon,i}(X_i^2 - 1)$, so that $t_\varepsilon = \sum_i
+\xi_{\varepsilon,i}$. By~\eqref{eq:3.11},
+\[
+  \sum_i E_v\bigl(\xi_{\varepsilon,i} - E_v\xi_{\varepsilon,i}\bigr)^4
+   \;\leq\; c\sum_i w_{\varepsilon,i}^4\,(1 + v_i^4).
+\]
+Using $\sum_i w_{\varepsilon,i}^4 \leq |w_\varepsilon|^2 \sum_i w_{\varepsilon,i}^2 = |w_\varepsilon|^2/2$ and
+$\sum_i w_{\varepsilon,i}^4 v_i^4 \leq \bigl(\sum_i w_{\varepsilon,i}^2 v_i^2\bigr)^2 \leq
+|w_\varepsilon|^2 h_\varepsilon(v)^2$,
+\[
+  \sum_i E_v\bigl(\xi_{\varepsilon,i} - E_v\xi_{\varepsilon,i}\bigr)^4
+   \;\leq\; c\,|w_\varepsilon|^2\bigl(1 + h_\varepsilon(v)^2\bigr).
+\]
+Since $\operatorname{Var}_v(t_\varepsilon) \geq 1$, the Lyapunov ratio is bounded by
+$c|w_\varepsilon|^2(1 + h_\varepsilon(v)^2)$. Under the hypotheses
+$|w_\varepsilon| = o(1)$ and $h_\varepsilon(v) = o(|w_\varepsilon|^{-1})$, this is $o(1)$
+uniformly in the prescribed family, so the Lyapunov CLT yields
+\[
+  t_\varepsilon(v) = t_\varepsilon - h_\varepsilon(v)
+   \;\xrightarrow{d}\; N\!\bigl(0,\,\operatorname{Var}_v(t_\varepsilon)\bigr)
+   \;\xrightarrow{|w_\varepsilon| h_\varepsilon(v)\to 0}\; N(0, 1),
+\]
+uniformly over $v \in \ell^2$ such that $h_\varepsilon(v) = o(|w_\varepsilon|^{-1})$.
+
+\medskip\noindent\textbf{Type I error and the bound $\gamma(\psi_{w_\varepsilon, T_\varepsilon}, V_\varepsilon) \to 0$.}
+Under $H_0$ (i.e.\ $v = 0$) we have $h_\varepsilon(0) = 0$, so Step~2 gives
+$t_\varepsilon \xrightarrow{d} N(0,1)$ under $P_0$. Hence $\alpha(\psi_{\varepsilon, T_\varepsilon}) =
+\Phi(-T_\varepsilon) + o(1)$ for any deterministic threshold $T_\varepsilon$.
+
+For Type II error in the consistency regime, fix $v \in V_\varepsilon$, so
+$h_\varepsilon(v) \geq h_\varepsilon \to \infty$, and set $T_\varepsilon = h_\varepsilon/2$.
+By Chebyshev,
+\[
+  \beta(\psi_{w_\varepsilon, T_\varepsilon}, v)
+   = P_v(t_\varepsilon \leq T_\varepsilon)
+   \leq P_v\bigl(|t_\varepsilon - h_\varepsilon(v)| \geq h_\varepsilon(v) - h_\varepsilon/2\bigr)
+   \leq \frac{\operatorname{Var}_v(t_\varepsilon)}{(h_\varepsilon(v) - h_\varepsilon/2)^2}.
+\]
+Since $h_\varepsilon(v) \geq h_\varepsilon$ implies $h_\varepsilon(v) - h_\varepsilon/2 \geq
+h_\varepsilon/2$, and $\operatorname{Var}_v(t_\varepsilon) \leq 1 + 4|w_\varepsilon|
+h_\varepsilon(v)$,
+\[
+  \beta(\psi_{w_\varepsilon, T_\varepsilon}, v)
+   \leq \frac{1 + 4|w_\varepsilon| h_\varepsilon(v)}{(h_\varepsilon/2)^2}
+   = O\!\left(\frac{1}{h_\varepsilon^2} + \frac{|w_\varepsilon| h_\varepsilon(v)}{h_\varepsilon^2}\right) = o(1).
+\]
+Taking the supremum over $v \in V_\varepsilon$,
+\[
+  \gamma(\psi_{w_\varepsilon, T_\varepsilon}, V_\varepsilon)
+   = \alpha(\psi_{w_\varepsilon, T_\varepsilon}) + \sup_{v \in V_\varepsilon}
+       \beta(\psi_{w_\varepsilon, T_\varepsilon}, v) \to 0.
+\]
+
+\medskip\noindent\textbf{Sharp bounds under $|w_\varepsilon| = o(1)$.}
+Now assume additionally $|w_\varepsilon| = o(1)$. By Step~3, it suffices to consider
+$v \in V_\varepsilon$ with $h_\varepsilon(v) = O(1)$, since the case $h_\varepsilon(v) \to \infty$
+yields $\beta \to 0$ already. For such $v$, Step~2 applies and gives
+$t_\varepsilon(v) \xrightarrow{d} N(0, 1)$. Hence, with $T_\alpha = \Phi^{-1}(1 - \alpha)$,
+\begin{align*}
+  \beta(\psi_{\varepsilon, T_\alpha}, v)
+   &= P_v\bigl(t_\varepsilon \leq T_\alpha\bigr)
+    = P_v\bigl(t_\varepsilon - h_\varepsilon(v) \leq T_\alpha - h_\varepsilon(v)\bigr) \\
+   &= \Phi\bigl(T_\alpha - h_\varepsilon(v)\bigr) + o(1)
+    \leq \Phi(T_\alpha - h_\varepsilon) + o(1),
+\end{align*}
+using the monotonicity of $\Phi$ and $h_\varepsilon(v) \geq h_\varepsilon$. Taking the
+supremum over $v \in V_\varepsilon$,
+\[
+  \beta(\psi_{\varepsilon, T_\alpha}, V_\varepsilon) \leq \Phi(T_\alpha - h_\varepsilon) + o(1).
+\]
+
+For $T_\varepsilon = h_\varepsilon/2$, the Type I error is
+$\alpha(\psi_{\varepsilon, T_\varepsilon}) = \Phi(-h_\varepsilon/2) + o(1)$, while the
+Type II error at any $v \in V_\varepsilon$ with $h_\varepsilon(v) = O(1)$ satisfies
+\[
+  \beta(\psi_{\varepsilon, T_\varepsilon}, v)
+   = \Phi\bigl(h_\varepsilon/2 - h_\varepsilon(v)\bigr) + o(1)
+   \leq \Phi(-h_\varepsilon/2) + o(1).
+\]
+Summing the Type I error and the supremum of the Type II error,
+\[
+  \gamma(\psi_{\varepsilon, T_\varepsilon})
+   \leq \Phi(-h_\varepsilon/2) + \Phi(-h_\varepsilon/2) + o(1)
+   = 2\Phi(-h_\varepsilon/2) + o(1). \qedhere
+\]
+\end{proof}
