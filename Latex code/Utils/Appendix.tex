@@ -25,6 +25,40 @@
     \end{equation*}
     \textcolor{red}{Correct the proof}
 \end{proof}
+\begin{proof}[Proof of \Cref{klmixture}]
+Let $X = (X_1, \ldots, X_n) \sim \mathcal{N}(0,1)^{\otimes n}$ and let $\phi$ denote the
+standard Gaussian density. The mixture $M_n$ has density
+\[
+    m_n(x) = \frac{1}{2}\prod_{i=1}^{n}\phi(x_i - \omega)
+            + \frac{1}{2}\prod_{i=1}^{n}\phi(x_i + \omega).
+\]
+The likelihood ratio against $\mathcal{N}(0,1)^{\otimes n}$ is
+\[
+    \frac{m_n(X)}{\prod_i \phi(X_i)}
+    \;=\; \frac{1}{2}\bigl(e^{\omega T - n\omega^2/2} + e^{-\omega T - n\omega^2/2}\bigr)
+    \;=\; e^{-n\omega^2/2}\cosh(\omega T),
+\]
+where $T = \sum_{i=1}^n X_i \sim \mathcal{N}(0, n)$ under $\mathcal{N}(0,1)^{\otimes n}$.
+Hence
+\[
+    \mathrm{KL}\bigl(\mathcal{N}(0,1)^{\otimes n} \,\|\, M_n\bigr)
+    = -\mathbb{E}_X\!\left[\log \frac{m_n(X)}{\prod_i \phi(X_i)}\right]
+    = \frac{n\omega^2}{2} - \mathbb{E}\bigl[\log\cosh(\omega T)\bigr].
+\]
+Moreover, $\log\cosh(\omega T) \geq \omega^2 T^2/2 - \omega^4 T^4/12$, hence
+\[
+    \mathbb{E}\bigl[\log\cosh(\omega T)\bigr]
+    \;\geq\; \frac{\omega^2}{2}\,\mathbb{E}[T^2] - \frac{\omega^4}{12}\,\mathbb{E}[T^4].
+\]
+Since $T \sim \mathcal{N}(0,n)$, $\mathbb{E}[T^2] = n$ and $\mathbb{E}[T^4] = 3n^2$.
+Therefore
+\[
+    \mathrm{KL}\bigl(\mathcal{N}(0,1)^{\otimes n} \,\|\, M_n\bigr)
+    \;\leq\; \frac{n\omega^2}{2} - \frac{n\omega^2}{2} + \frac{\omega^4 \cdot 3n^2}{12}
+    \;=\; \frac{n^2\omega^4}{4},
+\]
+as claimed.
+\end{proof}
 \subsection{Proof of Lipschitz concentration for Gaussians}
 Firstly, note that we can restrict ourselves to smooth Lipschitz functions. Explicitely, if $f$ is an $L$-Lipschitz function, one can consider its mollification $f_\epsilon = f * \eta_\epsilon$ where $\eta$ is the standard mollifier.
  Moreover $f_\epsilon$ is smooth and converges uniformly on compact sets to $f$ as $\epsilon \rightarrow 0$. Now, we want to show the sub-Gaussianity of $f(Z)$ where $f : \R^d \rightarrow \R$ is an $L$-Lipschitz smooth function and $Z$ is a standard Gaussian.

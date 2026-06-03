@@ -324,20 +324,15 @@ Firstly, we use the fact that for any random probability distributions $P_0,P_1$
 \end{equation}
 Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound of order $\delta$ on the minimax error is equivalent to finding mixtures $\E P_0,\E P_1$ such that $1-TV(\E P_0,\E P_1)$ is of order $\delta$ (is $\Omega(\delta))$
 
-\begin{lemma}\label{rubignolle}
+\begin{lemma}\label{rubignolle}\cite{tsybakov}
     Let $\mu,\nu$ be two probability measures, then : 
     \begin{equation*}
-        1-TV(\mu,\nu) \geq \frac{1}{2} e^{-KL(\mu \Vert \nu)} \geq \frac{1}{2\bigl(1 + \chi^2(\mu\Vert\nu) \bigr)}
+        1-TV(\mu,\nu) \geq \frac{1}{2} e^{-KL(\mu \Vert \nu)} 
     \end{equation*}
-    Where $KL(\cdot \Vert \cdot)$ and $\chi^2(\cdot \Vert \cdot)$ denote the Kullback-Leibler and $\chi^2$ divergences respectively. 
+    Where $KL(\cdot \Vert \cdot)$ denote the Kullback-Leibler-divergences respectively. 
 \end{lemma}
 \begin{proof} [Proof of \Cref{rubignolle}] We will show that each one of the two inequalities hold true using Jensen inequality. 
- \begin{itemize}
-    \item Equivalently, we will show that : \begin{equation*}
-        \int \log\Bigl(\frac{d\mu}{d\nu}\Bigr)d\mu = KL(\mu\Vert\nu) \leq \log(1+\chi^2(\mu\Vert\nu)) = \log\Bigl(\int \frac{d\mu}{d\nu}d\mu\Bigr)
-    \end{equation*}
-    Which is a direct consequence of Jensen inequality (since $\log$ is concave)
-    \item Instead of the inequality above, one will show that : \begin{equation*}
+    Instead of the inequality above, one will show that : \begin{equation*}
         TV(\mu,\nu) \leq \sqrt{1-e^{-KL(\mu\Vert\nu)}} 
     \end{equation*}
     First, notice that : \begin{equation*}
@@ -352,8 +347,6 @@ Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound 
         &\geq \exp \Biggl(-\E_\mu \log\biggl(\frac{d\mu}{d\nu}\biggr)\Biggr) = \exp\biggl(-KL(\mu\Vert\nu)\biggr)
     \end{align*}
     And finally, one can conclude using the following inequality : $\sqrt{1-x} \leq 1-\frac{x}{2}$.
- \end{itemize}
- Combining the two points above yields the inequality.
 \end{proof}
 
 Now that we have all the necessary tools, we will prove the main theorem of this chapter. We will split this proof into many parts : 
