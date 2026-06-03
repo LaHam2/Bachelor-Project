@@ -165,9 +165,6 @@ In order to prove \Cref{prop1} we will need the following lemma :
 \begin{lemma}[Lipschitz concentration of Gaussians]\label{LipschitzConc}
     Let $Q$ be a $d$-dimensional standard gaussian, and let $f : \R^d \rightarrow \R$ be $L$-Lipschitz. Then $f(Q)$ is sub-Gaussian with variance proxy $L^2$
 \end{lemma}
-\begin{proof}[Proof of \Cref{LipschitzConc}] 
-    \textcolor{red}{Add proof, log-Sobolev inequality}
-\end{proof}
 \begin{lemma}\label{gaussianexpec}
     Let $a,b\in \R$, and let $Z$ be a standard normal. Then : \begin{equation*}
         \E \Phi(aZ+b) = \Phi\bigg(\frac{b}{\sqrt{1+a^2}}\bigg)
@@ -234,15 +231,91 @@ In order to prove this proposition, we will need few lemmas and prior results.
         &= \Phi\Biggl(\frac{W}{\sqrt{4+\frac{2}{n}}}\Biggr)-\Phi\Biggl(-\frac{W}{\sqrt{4+\frac{2}{n}}}\Biggr)
     \end{align*}
     Where $W \coloneqq \scal{\theta^X-\theta^Y}{\frac{U}{\norm{U}}}$. To simplify notations, let $\varphi \coloneqq \Phi\Bigl(\frac{\cdot}{\sqrt{4+\frac{2}{n}}}\Bigr)$, by Lipschitness of $\Phi$, we obtain that for $t \geq 0$: \begin{align*}
-        \P\Bigl( \Big|\varphi(W)-\E\varphi(W) \Big| \geq t\Bigr) &\leq \P\Bigl(\Bigr) \textcolor{red}{Finish the proof}
+        \P\Bigl( \Big|\varphi(W)-\E\varphi(W) \Big| \geq t\Bigr) &\leq \P\Bigl(\Big|\varphi(W) - \varphi(\E W)\Big|\geq t-\lipnorm{\varphi}\sqrt{\var{W}}\Bigr) \\
+        &\leq  \P \Bigl(|W-\E W| \geq \frac{t}{\lipnorm{\varphi}}-\sqrt{\var{W}} \Bigr)
     \end{align*}
+    Moreover, one can get an analogous inequality for $-W$. Now, the last ingredient is to show that $W$ concentrates well. 
 \begin{lemma}\label{youssef}
-    W is a sub-Gaussian random variable with variance proxy $\frac{1}{2n}$
+    W is a sub-Gaussian random variable with variance proxy $\frac{8}{n}$
 \end{lemma}
-\textcolor{blue}{Proof in the appendix}
+
+We have already seen that : 
+\begin{equation*}
+    \E[\sep(\hat{S})] = \E[\varphi(W)-\varphi(-W)]
+\end{equation*}
+Again, by Lipschitzness and \Cref{gaussianexpec}, we have that $|\E [\varphi(W)]-\varphi(\E W)|\lesssim \frac{1}{\sqrt{n}}$, hence : 
+\begin{equation}\label{omega}
+    \varphi(\E W)- \varphi(-\E W) \leq \E[\sep(\hat{S})] + \Omega(\frac{1}{\sqrt{n}})
+\end{equation}
+Where the implied constant is universal. In order to simplify notations, let $\tau \coloneqq \theta^X-\theta^Y, \sigma^2 = \frac{2}{n}$ and let $Q$ be a $\mathcal{N}(0,I_J)$ random vector, then : 
+\begin{equation*}
+    \E W = \E \bigg[ \bigscal{\tau}{\frac{\tau+\sigma Q}{\norm{\tau+\sigma Q}}}\bigg] = \frac{1}{\sigma}\E[\scal{\tau}{\nabla_Q \norm{\tau+\sigma Q}}] = \frac{1}{\sigma}\E[\scal{\tau}{Q}\norm{\tau+\sigma Q}]
+\end{equation*}
+Where the last equality is given by Stein's identity. By rotational invariance of Gaussian distribution, we get : 
+\begin{align*}
+    \E W &= \frac{\norm{\tau}}{\sigma}\E\Bigg[Q_1 \sqrt{(\norm{\tau}+\sigma Q_1)^2+\sigma^2Q_2^2 + \cdots \sigma^2Q_J^2}\Bigg]\\ 
+    &= \frac{\norm{\tau}}{\sigma}\E\Bigg[Q_1 \sqrt{(\norm{\tau}+\sigma Q_1)^2+\sigma^2Q_2^2 + \cdots \sigma^2Q_J^2} - Q_1 \sqrt{\norm{\tau}^2+\sigma^2 Q_1^2+\sigma^2 Q_2^2 + \cdots \sigma^2Q_J^2}\Bigg]\\
+    &= 2\norm{\tau}^2 \E \Bigg[ \frac{Q_1^2}{Q_1 \sqrt{(\norm{\tau}+\sigma Q_1)^2+\sigma^2Q_2^2 + \cdots \sigma^2Q_J^2} + Q_1 \sqrt{\norm{\tau}^2+\sigma^2 Q_1^2+\sigma^2 Q_2^2 + \cdots \sigma^2Q_J^2}} \Bigg]
+\end{align*}
+Now, by Cauchy-Schwartz inequality, and the fact that $\E |Q_1| = \frac{2}{\pi}$ is an absolute constant, we get that : 
+\begin{equation*}
+    (\E |Q_1^2|)^2 \lesssim \E \Bigg[ \frac{Q_1^2}{\sqrt{(\norm{\tau}+\sigma Q_1)^2+\sigma^2Q_2^2 + \cdots \sigma^2Q_J^2} + \sqrt{\norm{\tau}^2+\sigma^2 Q_1^2+\sigma^2 Q_2^2 + \cdots \sigma^2Q_J^2}} \Bigg] \times (\norm{\tau}+\sigma \sqrt{J})
+\end{equation*}
+Plugging everything into our expression for $\E W$, this yields : 
+\begin{equation*}
+    \E W \gtrsim \frac{\normp[2]{\tau}}{\norm{\tau} + \sigma\sqrt{J}}
+\end{equation*}
+To clarify notation, let us now write $\norm{\cdot}_J$ for the $\l_2$-norm restricted to
+the first $J$ coordinates. Taking $J = c \epsilon^{-1/s}$ it holds that
+\[
+  \norm{\tau}_J^2 \;=\; \norm{\tau}^2 - \sum_{j > J}\tau_j^2
+   \;\geq\; \norm{\tau}^2 - J^{-2s}\sum_{j > J}\tau_j^2 j^{2s}
+   \;=\; \norm{\tau}^2 - c^{-2s}\epsilon^2 \norm{\tau}_s^2.
+\]
+Since $\norm{\tau}_s \lesssim 1$ and $\norm{\tau} \geq \epsilon$ by assumption, we see
+that for large enough universal constant $c$ we have $\norm{\tau}_J \geq \epsilon/2$.
+Since the map $x \mapsto x^2/(x + a)$ is increasing for $x, a > 0$, it follows that
+\[
+  \E W \;\gtrsim\; \frac{\epsilon^2}{\epsilon + \sqrt{J/n}}
+\]
+for a universal implied constant (using $\sigma\sqrt{J} = \sqrt{2J/n}\asymp\sqrt{J/n}$).
+By the inequality $\Phi(x) - \Phi(-x) \geq x/2$ for $x \in [0,1]$ we obtain
+\[
+  \varphi(\E W) - \varphi(-\E W) \;\geq\; 1 \wedge \E W/2,
+\]
+which, combined with \Cref{omega}, completes the proof.
+
 \end{proof}
 \begin{proof}[Proof of \Cref{CATperf}]
-    \textcolor{red}{Add proof}
+    Apply \Cref{lemma13gerber} and set : 
+    \begin{equation*}
+        c = c_1 \ \text{ and } \ M \coloneqq \frac{c_3 \epsilon^2}{\epsilon+ \sqrt{\frac{J}{n}}}
+    \end{equation*}
+    By \Cref{lemma13gerber}, $\E[\sep(\hat{S})] \geq M -\frac{c_2}{\sqrt{n}}$. Now, choose $t = \sqrt{\frac{\log(2/\delta)}{c_5 n}}$ so that $2\exp(-c_5nt^2) = \delta$. By the tail bound given by \Cref{lemma13gerber} : 
+    \begin{equation*}
+        \P \Bigl(\sep(\hat{S}) <  \E[\sep(\hat{S})]-t-\frac{c_4}{\sqrt{n}}\Bigr) \leq \delta
+    \end{equation*}
+    Hence, with probability at least $1-\delta$, 
+    \begin{equation}\label{ineqsep}
+        \sep(\hat{S}) \geq M -\frac{c_2+c_4}{\sqrt{n}}-\sqrt{\frac{\log(2/\delta)}{c_5 n}} \geq M -C\sqrt{\frac{\log(2/\delta)}{n}}
+    \end{equation}
+    for some universal constant $C>0$. Now, for $J = \lfloor c\epsilon^{-\frac{1}{s}}\rfloor$, we have $\frac{J}{n} \asymp \frac{\epsilon^{-\frac{1}{s}}}{n}$, hence : 
+    \begin{equation*}
+        \epsilon+ \sqrt{\frac{J}{n}} \asymp \begin{cases*}
+            \epsilon &\text{if} $\sqrt{n} \epsilon^{1+\frac{1}{2s}} \geq 1$ \\ 
+            \sqrt{\frac{J}{n}} & ,otherwise
+        \end{cases*}
+    \end{equation*}
+    Using the asymptotics above, one can easily check that : 
+    \begin{equation*}
+        M \asymp \Bigl(\sqrt{n}\epsilon^{\frac{1}{s}}\wedge \frac{1}{\epsilon}\Bigr)\epsilon^2
+    \end{equation*}
+    Also, the second term in \Cref{ineqsep} is of order $\sqrt{\frac{\log(1/\delta)}{n}}$, under the condition $n \gtrsim \frac{1}{c'}n(\epsilon,\delta,\mathcal{P}_G(s,C_G))$ (where $c' = \frac{c_3}{2}$ after absorbing all universal constants), 
+    this term is at most $\frac{M}{2}$. Therefore, with probability at least $1-\delta$ : 
+    \begin{equation*}
+        \sep(\hat{S}) \geq \frac{M}{2} \asymp \Bigl(\sqrt{n}\epsilon^{\frac{1}{s}}\wedge \frac{1}{\epsilon}\Bigr)\epsilon^2
+    \end{equation*}
+    Which is the statement of \Cref{CATperf}. (Note that one can obtain the last inequality by adjusting the constants)
 \end{proof}
 \section{Sample complexity of CAT for Gaussian sequence model}
 Given two hypotheses $H_0,H_1$, our goal is to find a lower bound for the minimum achievable worst-case error. 
@@ -359,7 +432,7 @@ Which yields $n \gtrsim \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}
 
 \begin{proof}[Proof of \Cref{samplecomplexitythm}]
     Using \Cref{param} and \Cref{nonparam}, we get that there exists two constants $K_0,K_1 >0$ such that \Cref{parameq} and \Cref{nonparameq} hold true. 
-    Now, let $K = \min \{K_0,K_1\}$. One has : 
+    Let $K = \min \{K_0,K_1\}$, one has : 
     \begin{align*}
         n &\geq \max\Biggl\{K_0 \frac{\log(1/\delta)}{\epsilon^2},K_1 \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}\Biggr\}\\ 
         &\geq \max\Biggl\{K \frac{\log(1/\delta)}{\epsilon^2},K \frac{\sqrt{\log(1/\delta)}}{\epsilon^{\frac{4s+1}{2s}}}\Biggr\}\\ 
