@@ -1,0 +1,47 @@
+One of the most fundamental questions in statistics is deceptively simple: given a dataset,
+does it come from a distribution we have in mind, or not? This is the goodness-of-fit
+testing problem, and it has been studied for over a century. Classical tests such as
+Kolmogorov--Smirnov or Pearson's $\chi^2$ were designed for simple, low-dimensional
+settings. But as modern scientific applications generate data of increasing complexity and
+dimension, a natural question arises: how many observations do we actually need to answer
+this question reliably, and can we do so efficiently?
+
+This project addresses these questions in a nonparametric minimax framework, where one
+seeks to characterize the fundamental statistical limits of the problem, that is, the
+minimum number of samples required by \emph{any} test, regardless of its construction.
+The setting we focus on is the \textbf{Gaussian sequence model} with mean vector constrained
+to a Sobolev ellipsoid, a canonical model in nonparametric statistics that captures the
+essential difficulty of signal detection in function spaces. In this model, the unknown
+signal is represented as an infinite sequence of Gaussian observations, and the smoothness
+parameter $s$ of the Sobolev ellipsoid controls how fast the signal's frequency components
+decay. This makes it possible to study, in a precise and clean way, how the regularity of
+the signal affects the difficulty of testing.
+
+Two approaches to this problem are developed in this project. The first, covered in
+Chapter~3, is the classical approach based on $\chi^2$-type tests, pioneered by \cite{Ing2012}. These tests aggregate a weighted sum of squared
+observations and reject the null hypothesis when this sum is large. The minimax theory
+for such tests is well understood, and they are known to be optimal in the Gaussian
+sequence model. The second approach, covered in Chapter~4, is more recent and comes from
+a surprising direction: machine learning. The \textbf{Classifier-Accuracy Test} (CAT),
+introduced by \cite{gerberclas}, replaces the classical test statistic by
+a binary classifier trained to distinguish samples from the null and alternative
+distributions. Rather than computing a closed-form statistic, the classifier implicitly
+learns a \emph{separating set} (i.e. a region of the sample space where the two
+distributions differ most) and the test is based on how many observations fall in
+this region.
+
+At first glance, restricting the classifier to a binary output might seem wasteful: the
+Neyman--Pearson lemma tells us that the optimal test should aggregate the full
+log-likelihood ratio, not just threshold it. However, one of the main findings of
+\cite{gerberclas} is that this intuition is misleading: a well-chosen binary separating
+set is sufficient to achieve minimax optimality, at least in the sense of sample
+complexity. This result bridges two seemingly distant fields, nonparametric statistics
+and machine learning and suggests that classifier-based testing is not merely a
+practical heuristic, but a theoretically grounded procedure.
+
+The project is organized as follows. \Cref{chap2} introduces the general minimax framework
+for hypothesis testing, including the Bayesian and minimax approaches and the connection
+between them. \Cref{chap3} specializes to the Gaussian sequence model and develops the
+classical theory of minimax distinguishability and $\chi^2$-type tests. \Cref{chap4}
+introduces the CAT framework, establishes the key lemmas needed to analyze the performance
+of the separating set, and proves the minimax lower bound on the sample complexity.

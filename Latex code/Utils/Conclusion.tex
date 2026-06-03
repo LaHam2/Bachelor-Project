@@ -1,0 +1,38 @@
+
+This project set out to understand when and why goodness-of-fit testing becomes hard in
+high-dimensional models, and how modern machine-learning-inspired procedures compare to
+classical statistical tests. The Gaussian sequence model over Sobolev ellipsoids provided
+a clean and mathematically tractable setting in which these questions could be made precise.
+
+Chapter~3 revisited the classical theory of minimax distinguishability through the lens of
+$\chi^2$-type tests. The key takeaway is that the smoothness of the signal class completely
+governs the difficulty of the problem: there is a sharp phase transition below which no
+test can do better than random guessing, and above which consistent testing becomes
+possible. This dichotomy is a fundamental feature of the problem, independent of the
+specific test used.
+
+Chapter~4 then asked whether a classifier-based approach could achieve the same limits.
+The answer, perhaps surprisingly, is yes. We proved that any test requires at least
+\[
+    n(\varepsilon, \delta, s)
+    \;\gtrsim\;
+    \frac{\sqrt{\log(1/\delta)}}{\varepsilon^{\frac{4s+1}{2s}}}
+    + \frac{\log(1/\delta)}{\varepsilon^{2}}
+\]
+observations, and that the CAT test based on a truncated likelihood-ratio separating set
+matches this bound. The two terms in the lower bound tell different stories: the first
+captures the nonparametric hardness of the problem through the smoothness parameter $s$,
+while the second is simply the unavoidable cost of achieving high confidence $\delta$ in
+any binary testing problem.
+
+Of course, CAT is not the only way to approach goodness-of-fit testing. Classical tests
+such as Kolmogorov--Smirnov, $\chi^2$ goodness-of-fit, or kernel-based methods like the
+Maximum Mean Discrepancy have been studied for decades and remain widely used in practice.
+What makes CAT interesting is not that it outperforms these methods, but that it achieves
+the same fundamental limits while being naturally suited to the modern setting where
+distributions are only accessible through simulators.
+
+More broadly, the results presented here suggest that the boundary between statistical
+theory and machine learning is less sharp than it might seem: a procedure motivated by
+classification can, with the right analysis, be shown to be optimal in a rigorous
+minimax sense.

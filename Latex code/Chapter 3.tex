@@ -19,7 +19,44 @@ We denote by $P_v$ the distribution of $X$ when the signal is $v$, and by $P_0$ 
     \ell^2 \coloneqq \Bigl\{ (u_i)_{i\in I} : \sum_{i \in I} u_i^2 < \infty \Bigr\}
 \end{equation*}
 \end{remark}
-\textcolor{red}{Add more intuition about the choice of the model}
+\subsection{The Sobolev ellipsoid and the Gaussian sequence model}
+
+\begin{definition}[Gaussian sequence model on the Sobolev ellipsoid]
+For $s, C > 0$, the \emph{Sobolev ellipsoid} is $\mathcal{E}(s,C) := \bigl\{\theta \in
+\mathbb{R}^{\mathbb{N}} : \sum_{j=1}^\infty j^{2s}\theta_j^2 \leq C\bigr\}$. Setting
+$\mu_\theta = \bigotimes_{j=1}^\infty \mathcal{N}(\theta_j, 1)$, the model class is:
+\[
+    \mathcal{P}_G(s, C_G) := \{\mu_\theta \;;\; \theta \in \mathcal{E}(s, C_G)\}.
+\]
+\end{definition}
+
+\noindent\textbf{Intuition.} The weight $j^{2s}$ in the Sobolev constraint penalizes
+high-frequency components: for the sum to stay bounded, the coefficients must satisfy
+$\theta_j = O(j^{-s})$. A large $s$ forces fast decay (smooth signal, easy to detect),
+while a small $s$ allows more energy at high frequencies (rough signal, harder to detect).
+This is directly reflected in Theorem~\ref{thm:main}: the exponent $\frac{4s+1}{2s}$ is
+decreasing in $s$.
+
+\medskip\noindent\textbf{Connection to the white noise model.}
+This model arises naturally from the Gaussian white noise model $dY_t = f(t)\,dt + dW_t$.
+Projecting onto an orthonormal basis $\{\varphi_j\}$ of $L^2[0,1]$ gives
+$y_j = \theta_j + \varepsilon_j$ with $\varepsilon_j \overset{\text{i.i.d.}}{\sim}
+\mathcal{N}(0,1)$ and $\theta_j = \langle f, \varphi_j\rangle$. The Sobolev constraint on
+$\theta$ then corresponds exactly to a Sobolev regularity condition on $f$. Testing $H_0 : P_X = P_0$ is thus equivalent to testing whether an unknown signal $f$
+equals a given reference $f_0$.
+
+\medskip\noindent\textbf{Truncation.} Since $\theta \in \mathcal{E}(s,C)$ forces
+$\theta_j \to 0$, only the first $J \asymp \varepsilon^{-1/s}$ coordinates carry a detectable
+signal; beyond index $J$ the components are swamped by noise. This truncation is the key
+structural insight behind the separating set constructed in what follows.
+\section{Preliminary results } 
+The hard part of this kind of frameworks consists in finiding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
+\begin{definition}
+    Let $S \subseteq \mx$ be a measurable set, and $\mu,\nu$ be two probability measures on $\mx$. We define the separation and size of $S$ respectively as follows : 
+    \begin{equation*}
+        \sep(S) = \mu(S)-\nu(S) \ \text{ and } \ \tau(S) = \min(\mu(S)\mu(S^c),\nu(S)\nu(S^c))
+    \end{equation*}
+\end{definition}
 \section{Classical theory of minimax distinguishability}
 \subsection{Asymptotic Framework}
 In this chapter, instead of considering only one hypothesis testing problem, we will follow an asymptotic approach in which we will be considering a family of Hypothesis testing problems indexed by a parameter $\epsilon \rightarrow \epsilon_0$. 
@@ -78,7 +115,7 @@ Below, we will assume that $P_{\epsilon,0}$ dominates all the other measures $P_
     \end{itemize}
 \end{prop}
 \begin{proof}
-The first statement follows from the inequality
+The first statement follows from the inequalityc
 \[
   |P_1 - P_0|_1 = E_{P_0}|L - 1| \leq \bigl(E_{P_0}|L - 1|^2\bigr)^{1/2} = |P_1 - P_0|_2.
 \]

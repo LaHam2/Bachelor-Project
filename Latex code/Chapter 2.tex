@@ -1,7 +1,72 @@
 \section{Goodness-of-Fit testing : Definitions and criteria}
 
+Let $(\mathcal{X}, \mathcal{A})$ be a measurable space and let $\mathcal{P}$ be a family
+of probability measures on it. Given two disjoint subfamilies $\mathcal{P}_0, \mathcal{P}_1
+\subseteq \mathcal{P}$ with $\mathcal{P}_0 \neq \emptyset$, the \emph{goodness-of-fit
+testing problem} consists in deciding, from a single observation $X \sim P$, between
+\[
+  H_0 : P \in \mathcal{P}_0
+  \qquad \text{versus} \qquad
+  H_1 : P \in \mathcal{P}_1.
+\]
+The hypothesis $H_0$ is called \emph{simple} if $\mathcal{P}_0 = \{P_0\}$, and
+\emph{composite} otherwise.
 
-\section{Bayesian approach for goodness-of-fit testing}
+\begin{definition}[Test]
+A (randomized) \emph{test} is a measurable function $\psi : \mathcal{X} \to [0, 1]$ : upon
+observing $X = x$, the null hypothesis $H_0$ is rejected with probability $\psi(x)$ and
+accepted with probability $1 - \psi(x)$. If $\psi$ takes values only in $\{0, 1\}$, the
+test is said to be \emph{nonrandomized}, and the set
+$\mathcal{X}_{\mathrm{cr}} = \{x \in \mathcal{X} : \psi(x) = 1\}$ is its \emph{critical region}.
+We denote by $\Psi$ the set of all tests.
+\end{definition}
+
+Two error functions are naturally associated to any test $\psi \in \Psi$:
+\begin{itemize}
+  \item the \emph{type~I error} (rejecting $H_0$ when it holds) :
+  \[
+    \alpha(\psi, P) = \mathbb{E}_P[\psi], \qquad P \in \mathcal{P}_0;
+  \]
+  \item the \emph{type~II error} (accepting $H_0$ when it does not hold) :
+  \[
+    \beta(\psi, P) = \mathbb{E}_P[1 - \psi], \qquad P \in \mathcal{P}_1.
+  \]
+\end{itemize}
+For composite hypotheses, the overall quality of a test is measured by the worst-case
+errors
+\[
+  \alpha(\psi, \mathcal{P}_0) = \sup_{P \in \mathcal{P}_0} \alpha(\psi, P),
+  \qquad
+  \beta(\psi, \mathcal{P}_1) = \sup_{P \in \mathcal{P}_1} \beta(\psi, P).
+\]
+
+Since reducing one error typically increases the other, two classical strategies are used
+to select a test:
+\begin{itemize}
+  \item \textbf{Neyman--Pearson approach.} Fix a significance level $\alpha \in (0, 1)$,
+  restrict attention to the set
+  \[
+    \Psi_\alpha = \Psi_{\alpha, \mathcal{P}_0} = \bigl\{\psi \in \Psi :
+      \alpha(\psi, \mathcal{P}_0) \leq \alpha\bigr\},
+  \]
+  and seek to minimize the type~II error over $\Psi_\alpha$.
+
+  \item \textbf{Combined-error approach.} For a weight $t \geq 0$, minimize the weighted
+  sum $t\,\alpha(\psi, \mathcal{P}_0) + \beta(\psi, \mathcal{P}_1)$ over all tests
+  $\psi \in \Psi$. The case $t = 1$ yields the \emph{total error}
+  $\gamma(\psi) = \alpha(\psi, \mathcal{P}_0) + \beta(\psi, \mathcal{P}_1)$.
+\end{itemize}
+
+When $\mathcal{P}_0$ or $\mathcal{P}_1$ is composite and of dimension greater than one,
+the set of admissible tests is too large to admit general optimality recommendations.
+A natural way around this is to characterize tests not through their pointwise error
+functions $\alpha(\psi, P), \beta(\psi, P)$, but through monotone functionals $F_1(\psi),
+F_2(\psi)$ aggregating the errors over $\mathcal{P}_0$ and $\mathcal{P}_1$. The two
+canonical choices, either  \emph{averaging} (Bayesian approach, Section~\ref{sec:bayesian}) or
+\emph{taking the supremum} (minimax approach, Section~\ref{sec:minimax}). These two approaches are developed
+in the next two sections.
+
+\section{Bayesian approach for goodness-of-fit testing}\label{sec:bayesian}
 One can note that since the set of admissible test is too wide, there are no general recommendations as to how to select optimal tests when the alternative is composite and of dimension more than one.
 A way out of this situation is to characterize the test, not in the usual way by using error functions $\alpha(\psi,P),\beta(\psi,Q)$ for some $P\in \mp_0, Q\in\mp_1$, but by some monotone functional $F_1(\psi),F_2(\psi)$
 \subsection{General setting}
@@ -52,7 +117,7 @@ Given all these definitions, the Bayesian hypothesis testing is reduced to testi
 \end{proof}
 
 
-\section{Minimax approach in Hypothesis testing}
+\section{Minimax approach in Hypothesis testing}\label{sec:minimax}
 \subsection{General setting}
 Instead of considering the average error, we consider maximum error, in this section, define : 
 \begin{align}
