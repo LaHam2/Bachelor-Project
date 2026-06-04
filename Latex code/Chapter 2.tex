@@ -100,11 +100,11 @@ Given all these definitions, the Bayesian hypothesis testing is reduced to testi
 \begin{remark}
     Note that when we have a parametrization which corresponds to an injective map $\Theta \rightarrow \mp$, we set a Borel $\sigma$-algebra $\mathcal{T}$ on $\Theta$ (with respect to some topology) that makes the map measurable, one can assume that the priors $\pi_0,\pi_1$ are defined on ($\Theta,\mathcal{T}$). Hence, in our specific context, one can assume that $\pi_0,\pi_1$ are measures on ($\R^n,\mathcal{B}^n$) in the finite-dimensional case, or on ($\ell^2,\mathcal{B}$) in the infinite-dimensional case (Here $\mathcal{B}$ denotes a Borel $\sigma$-algebra on $\ell^2$).
 \end{remark}
-\textcolor{red}{Add details + define the following measure}
-\begin{equation}\label{measureanalytic}
-    r(dv) = C^{-1}\pi(dv)e^{-\frac{\left|v\right|^2}{2}} , C = \int e^{-\frac{\left|v\right|^2}{2}} \pi(dv) = L_\pi(0)
-\end{equation}
-\begin{prop}\label{prop2.1}
+\begin{prop}\citet[Proposition 2.2]{Ing2012}
+Let $\pi$ be a prior on $(R^n, B^n)$. Then the likelihood ratio extended to the whole $n$-dimensional complex space $L_\pi(z)$ is an analytical function.
+\end{prop}
+
+\begin{prop}\label{prop2.1}\citet[Proposition 2.3]{Ing2012}
     Let $\pi_0,\pi_1$ be two priors. Then the following equivalence holds : 
     \begin{equation*}
         P_{\pi_0} = P_{\pi_1} \Leftrightarrow \pi_0 = \pi_1
@@ -181,7 +181,7 @@ Then, one can rewrite the inequalities as :
     \gamma \geq 1-\frac{1}{2}\liminf_{n\rightarrow \infty} d(P_{\pi_{0,n}},P_{\pi_{1,n}})& \label{limsupgamma1}
 \end{align}
 One can see that this can be also true if $ \pi_{0,n}(\mp_0) \rightarrow 1$ and $ \pi_{1,n}(\mp_1) \rightarrow 1$ 
-\begin{prop}
+\begin{prop}\citet[Proposition 2.9]{Ing2012}
     Let $\pi_{0,n},\pi_{1,n}$ be sequences of priors such that : 
     \begin{equation*}
         \lim_{n\rightarrow \infty} \pi_{0,n} (\mp_0) = 1, \lim_{n\rightarrow \infty} \pi_{1,n} (\mp_1) = 1 
@@ -196,24 +196,24 @@ Let us consider conditional priors
 \]
 defined by
 \[
-  \pi_B(A) = \pi(A \cap B)/\pi(B); \qquad \pi_B(B) = 1,
+  \pi_B(A) = \frac{\pi(A \cap B)}{\pi(B)},
 \]
 and
 \begin{align}
   |\pi_B - \pi|_1
-    &= \int_B |\pi_B(dP) - \pi(dP)| + \pi(\bar B)
-     = \int_B \frac{1 - \pi(B)}{\pi(B)}\,\pi(dP) + \pi(\bar B) \notag\\
+    &= \int_B |d\pi_B(P) - d\pi(P)| + \pi(\bar B)
+     = \int_B \frac{1 - \pi(B)}{\pi(B)}\,d\pi(P) + \pi(\bar B) \notag\\
     &= \frac{1 - \pi(B)}{\pi(B)}\,\pi(B) + \pi(\bar B)
      = 2\bigl(1 - \pi(B)\bigr),
      \label{eq:2.49}
 \end{align}
 where $\bar B$ is the complement of $B$. By continuity $\gamma(t; \mathcal{P}_0, \mathcal{P}_1)$,
 $\beta(\alpha; \mathcal{P}_0, \mathcal{P}_1)$ on $\mathcal{P}_0, \mathcal{P}_1$
-(see Proposition~2.1), it suffices to check that
+(see \citet[Proposition 2.1]{Ing2012}), it suffices to check that
 \[
   |P_{\tilde\pi_{l,n}} - P_{\pi_{l,n}}|_1 \to 0, \qquad l = 0, 1.
 \]
-The last relation follows from \textcolor{red}{Add eq 2.32}:
+The last relation follows from \citet[Eq 2.32]{Ing2012}:
 \[
   |P_{\tilde\pi_{l,n}} - P_{\pi_{l,n}}|_1
     \;\leq\; |\tilde\pi_{l,n} - \pi_{l,n}|_1

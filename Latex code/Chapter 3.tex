@@ -227,9 +227,8 @@ Under the null hypothesis, one can note that $\E_0 t_\epsilon$, moreover, one ca
 The proof combines Lemma~3.1 of Ingster--Suslina (giving the variance bound and asymptotic
 normality of $t_\varepsilon$) with Corollary~3.3 (giving the minimax error bounds), the
 latter itself drawing on Corollaries~3.1--3.2.
-
-\medskip\noindent\textbf{Variance bound \eqref{eq:3.4}.}
-Under $P_v$ we have $X_i = \eta_i + v_i$ with $\eta_i \sim N(0,1)$ i.i.d.\ Writing
+\begin{itemize}
+\item Under $P_v$ we have $X_i = \eta_i + v_i$ with $\eta_i \sim N(0,1)$ i.i.d.\ Writing
 $x = \eta + t$ with $\eta \sim N(0,1)$, $t \in \mathbb{R}$, a direct calculation gives
 \begin{equation}\label{eq:3.11}
   E(x^2) = 1 + t^2, \quad \operatorname{Var}(x^2) = 2 + 4t^2, \quad
@@ -251,10 +250,8 @@ $w_{\varepsilon,i}^2 v_i^2 \leq |w_\varepsilon|\, w_{\varepsilon,i} v_i^2$, we g
    \;\leq\; 1 + 4|w_\varepsilon|\sum_i w_{\varepsilon,i}\, v_i^2
    \;=\; 1 + 4|w_\varepsilon|\, h_\varepsilon(v),
 \]
-which is~\eqref{eq:3.4}.
-
-\medskip\noindent\textbf{Asymptotic normality of $t_\varepsilon(v)$.}
-Set $\xi_{\varepsilon,i} = w_{\varepsilon,i}(X_i^2 - 1)$, so that $t_\varepsilon = \sum_i
+which is \Cref{chi2minimax1}.
+\item Set $\xi_{\varepsilon,i} = w_{\varepsilon,i}(X_i^2 - 1)$, so that $t_\varepsilon = \sum_i
 \xi_{\varepsilon,i}$. By~\eqref{eq:3.11},
 \[
   \sum_i E_v\bigl(\xi_{\varepsilon,i} - E_v\xi_{\varepsilon,i}\bigr)^4
@@ -277,9 +274,7 @@ uniformly in the prescribed family, so the Lyapunov CLT yields
    \;\xrightarrow{|w_\varepsilon| h_\varepsilon(v)\to 0}\; N(0, 1),
 \]
 uniformly over $v \in \ell^2$ such that $h_\varepsilon(v) = o(|w_\varepsilon|^{-1})$.
-
-\medskip\noindent\textbf{Type I error and the bound $\gamma(\psi_{w_\varepsilon, T_\varepsilon}, V_\varepsilon) \to 0$.}
-Under $H_0$ (i.e.\ $v = 0$) we have $h_\varepsilon(0) = 0$, so Step~2 gives
+\item Under $H_0$ (i.e.\ $v = 0$) we have $h_\varepsilon(0) = 0$, so Step~2 gives
 $t_\varepsilon \xrightarrow{d} N(0,1)$ under $P_0$. Hence $\alpha(\psi_{\varepsilon, T_\varepsilon}) =
 \Phi(-T_\varepsilon) + o(1)$ for any deterministic threshold $T_\varepsilon$.
 
@@ -307,8 +302,7 @@ Taking the supremum over $v \in V_\varepsilon$,
        \beta(\psi_{w_\varepsilon, T_\varepsilon}, v) \to 0.
 \]
 
-\medskip\noindent\textbf{Sharp bounds under $|w_\varepsilon| = o(1)$.}
-Now assume additionally $|w_\varepsilon| = o(1)$. By Step~3, it suffices to consider
+\item Now assume additionally $|w_\varepsilon| = o(1)$. By Step~3, it suffices to consider
 $v \in V_\varepsilon$ with $h_\varepsilon(v) = O(1)$, since the case $h_\varepsilon(v) \to \infty$
 yields $\beta \to 0$ already. For such $v$, Step~2 applies and gives
 $t_\varepsilon(v) \xrightarrow{d} N(0, 1)$. Hence, with $T_\alpha = \Phi^{-1}(1 - \alpha)$,
@@ -339,4 +333,5 @@ Summing the Type I error and the supremum of the Type II error,
    \leq \Phi(-h_\varepsilon/2) + \Phi(-h_\varepsilon/2) + o(1)
    = 2\Phi(-h_\varepsilon/2) + o(1). \qedhere
 \]
+\end{itemize}
 \end{proof}
