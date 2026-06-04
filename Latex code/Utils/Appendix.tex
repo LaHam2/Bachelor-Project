@@ -13,18 +13,7 @@
         \E\Phi(aZ+b) = \P(aZ+b\geq Z') = \P \Bigl(\frac{Z'-aZ}{\sqrt{1+a^2}} \leq \frac{b}{\sqrt{1+a^2}}\Bigr) = \Phi(\frac{b}{\sqrt{1+a^2}})
     \end{equation*}
     The last equality is given by the fact that $\frac{Z'-aZ}{\sqrt{1+a^2}} \sim \mathcal{N}(0,1)$.
-\end{proof}
-\begin{proof}[Proof of \Cref{youssef}]
-    Let $\tau \coloneqq \theta^X - \theta^Y$ and $\sigma^2  \frac{1}{2n}$ and let $Q$ be a standard Gaussian random vector such that : 
-    \begin{equation*}
-        W =  \bigscal{\tau}{\frac{\tau+\sigma Q}{\norm{\tau+\sigma Q}}} \ \text{ in distribution }
-    \end{equation*}
-    Then, one can decompose $W$ as follows : 
-    \begin{equation*}
-        \bigscal{\tau}{\frac{\tau +\sigma Q}{\norm{\tau +\sigma Q}}} = \bigscal{\frac{\tau}{\E \big(\norm{\tau}\big)}}{ss}
-    \end{equation*}
-    \textcolor{red}{Correct the proof}
-\end{proof}
+\end{proof} 
 \begin{proof}[Proof of \Cref{klmixture}]
 Let $X = (X_1, \ldots, X_n) \sim \mathcal{N}(0,1)^{\otimes n}$ and let $\phi$ denote the
 standard Gaussian density. The mixture $M_n$ has density
@@ -59,7 +48,7 @@ Therefore
 \]
 as claimed.
 \end{proof}
-\subsection{Proof of Lipschitz concentration for Gaussians}
+\section{Proof of Lipschitz concentration for Gaussians}
 Firstly, note that we can restrict ourselves to smooth Lipschitz functions. Explicitely, if $f$ is an $L$-Lipschitz function, one can consider its mollification $f_\epsilon = f * \eta_\epsilon$ where $\eta$ is the standard mollifier.
  Moreover $f_\epsilon$ is smooth and converges uniformly on compact sets to $f$ as $\epsilon \rightarrow 0$. Now, we want to show the sub-Gaussianity of $f(Z)$ where $f : \R^d \rightarrow \R$ is an $L$-Lipschitz smooth function and $Z$ is a standard Gaussian.
 This can be done using the Gaussian log-Sobolev inequality, which we will state in the following form : 

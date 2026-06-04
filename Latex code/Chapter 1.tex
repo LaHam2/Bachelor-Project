@@ -30,14 +30,10 @@ learns a \emph{separating set} (i.e. a region of the sample space where the two
 distributions differ most) and the test is based on how many observations fall in
 this region.
 
-At first glance, restricting the classifier to a binary output might seem wasteful: the
-Neyman--Pearson lemma tells us that the optimal test should aggregate the full
-log-likelihood ratio, not just threshold it. However, one of the main findings of
-\cite{gerberclas} is that this intuition is misleading: a well-chosen binary separating
-set is sufficient to achieve minimax optimality, at least in the sense of sample
-complexity. This result bridges two seemingly distant fields, nonparametric statistics
-and machine learning and suggests that classifier-based testing is not merely a
-practical heuristic, but a theoretically grounded procedure.
+At first glance, restricting the classifier to a binary output might seem wasteful in
+view of the Neyman--Pearson lemma. Yet \cite{gerberclas} shows that a well-chosen binary
+separating set already achieves minimax-optimal sample complexity, making classifier-based
+testing a theoretically grounded procedure rather than a mere heuristic.
 
 The project is organized as follows. \Cref{chap2} introduces the general minimax framework
 for hypothesis testing, including the Bayesian and minimax approaches and the connection
@@ -45,3 +41,10 @@ between them. \Cref{chap3} specializes to the Gaussian sequence model and develo
 classical theory of minimax distinguishability and $\chi^2$-type tests. \Cref{chap4}
 introduces the CAT framework, establishes the key lemmas needed to analyze the performance
 of the separating set, and proves the minimax lower bound on the sample complexity.
+
+\section*{Acknowledgement}
+I am deeply grateful to Prof.~Sven Wang for offering me the opportunity to undertake
+this project under his supervision. I would also like to extend my heartfelt thanks to
+Duc Hoang for the considerable time he devoted to guiding me, for his thoughtful and
+constructive feedback, and for the freedom he gave me in shaping the content of this
+work.

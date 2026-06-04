@@ -131,25 +131,74 @@ Then~\eqref{eq:2.58} follows from relations
 \end{align*}
 \end{proof}
 \subsection{Separation radius and goodness-of-fit}
-In Goodness-of-Fit problems (i.e. $\Theta_{\epsilon,1} = \Theta_{\epsilon,0}^C$ in \Cref{hyptest}), it is impossible to use directly minimax approach because : 
-\begin{equation*}
-    \forall \epsilon : \gamma_\epsilon(\Theta_{\epsilon,0},\Theta_{\epsilon,1}) \equiv 1
-\end{equation*}
-Therefore, we consider alternatives of the form : 
-\begin{equation*}
-    \Theta_{\epsilon,1} = \bigl\{\theta \in \Theta : d(\theta,\Theta_{\epsilon,0}) \geq r_\epsilon\bigr\}
-\end{equation*}
-Where $d$ is a distance function and for $\theta \in \Theta : d(\theta,\Theta_{\epsilon,0}) \coloneqq \inf_{\theta_0 \in \Theta_{\epsilon,0}} d(\theta,\theta_0)$. Now, our problem can be stated as follows : What are the radii $r_\epsilon$ in order to obtain minimax distinguishability $\gamma_\epsilon \rightarrow 0$ ?\\ 
-We will be studying this in the specific case of simple null-hypothesis of the form : $\H_0 : \theta \in \Theta_{\epsilon,0} = \{\theta_0\}$.
+
+In Goodness-of-Fit problems (i.e.\ $\Theta_{\varepsilon,1} = \Theta_{\varepsilon,0}^c$ in
+Equation~\eqref{hyptest}), it is impossible to use directly the minimax approach because
+\begin{equation}
+  \forall\,\varepsilon:\quad \gamma_\varepsilon(\Theta_{\varepsilon,0},\Theta_{\varepsilon,1}) \equiv 1.
+  \label{eq:trivial}
+\end{equation}
+The reason is that the alternative sets $\Theta_{\varepsilon,1} = \Theta \setminus \Theta_{\varepsilon,0}$
+contain points $\theta_{\varepsilon,1}$ arbitrarily close to $\Theta_{\varepsilon,0}$: if the
+parametrisation $\theta \mapsto P_{\varepsilon,\theta}$ is continuous in the $L_1$-norm, one can
+always find sequences $\theta_{\varepsilon,0}^n \in \Theta_{\varepsilon,0}$,
+$\theta_{\varepsilon,1}^n \notin \Theta_{\varepsilon,0}$ such that
+$|P_{\varepsilon,\theta_{\varepsilon,1}^n} - P_{\varepsilon,\theta_{\varepsilon,0}^n}|_1 \to 0$.
+One might hope to restore testability by simply bounding the signal away from zero in $\ell^2$.
+The following result shows that this is hopeless.
+
+\begin{prop} \citet[Corollary~2.1]{Ing2012}
+\label{triviality}
+Under the Gaussian sequence model, let us test $H_0 : v = 0$ against $H_1 : v \in D^{(\ell)}(\rho)$
+where $D^{(\ell)}(\rho) = \{v \in \ell^2 : |v| \geq \rho\}$, or against $H_1 : v \in S^{(\ell)}(\rho)$
+where $S^{(\ell)}(\rho) = \{v \in \ell^2 : |v| = \rho\}$.
+Then $\gamma = 1$ for any $\rho > 0$.
+\end{prop}
+
+\Cref{triviality} shows that the problem is \emph{trivial} in the minimax sense as
+soon as the alternative is only constrained by an $\ell^2$-norm. The same phenomenon occurs for
+any $\ell^p$-norm: the alternative is simply ``too wide'' in the sense that it contains signals
+with arbitrarily high-frequency oscillations that are indistinguishable from zero, regardless of
+their $\ell^p$-norm. For instance, the collection
+$v^{(k)}_j = \rho \cdot \mathbf{1}_{j=k}$, $k \to \infty$,
+lies on the sphere $S^{(\ell)}(\rho)$ and satisfies $|P_{v^{(k)}} - P_0|_1 \to 0$.
+
+The way out is to introduce an additional \emph{smoothness constraint} that prevents energy from
+concentrating at arbitrarily high frequencies. In the formalism of Ingster and Suslina
+\citeyear{Ing2012}, one considers alternatives of the form
+\begin{equation}
+  \Theta_{\varepsilon,1} = \bigl\{\theta \in \Theta : h_1(\theta, \theta_0) \geq r_\varepsilon,\;
+  h_2(\theta) \leq R \bigr\},
+  \label{eq:two-sided-alt}
+\end{equation}
+where $h_1(\cdot, \theta_0)$ is the separation norm that bounds the signal away from the null, and
+$h_2(\cdot) \leq R$ is a regularity constraint that controls the ``roughness'' of admissible
+signals. In our setting, $h_1(\theta, 0) = \|\theta\|_{\ell^2}$ and $h_2(\theta) =
+\|\theta\|_s := \bigl(\sum_{j=1}^\infty j^{2s}\theta_j^2\bigr)^{1/2}$.
+
 \begin{definition}[Critical radii]
-We say that a family $r_{\epsilon}^*$ is the critical radii if it satisfies the following dichotomy : 
+\label{def:critical-radii}
+A family $r_\varepsilon^*$ is called the \emph{critical radii} if it satisfies the following
+dichotomy:
 \begin{align*}
-    \gamma_\epsilon \rightarrow 0 & \Leftrightarrow \frac{r_\epsilon}{r_{\epsilon}^*} \rightarrow \infty \\
-    \gamma_\epsilon \rightarrow 1 &\Leftrightarrow \frac{r_\epsilon}{r_{\epsilon}^*} \rightarrow 0
+  \gamma_\varepsilon \to 0 &\iff \frac{r_\varepsilon}{r_\varepsilon^*} \to \infty, \\
+  \gamma_\varepsilon \to 1 &\iff \frac{r_\varepsilon}{r_\varepsilon^*} \to 0.
 \end{align*}
-Moreover, we say that distinguishability conditions are in the classical form if the are in the form above. 
+Moreover, we say the distinguishability conditions are in \emph{classical form} if they take the
+form above.
 \end{definition}
-\textcolor{green}{TO DO}
+
+\begin{remark}
+It can be shown that under the regular parametric Gaussian white-noise model one has $r_\varepsilon^* = \varepsilon$,
+and under an i.i.d.\ density model with sample size $N$ one has $r_N^* = N^{-1/2}$; these are
+called the \emph{classical} rates.
+The existence of such a sharp threshold $r_\varepsilon^*$ is not automatic; it must be established
+for each specific model. In the Gaussian sequence model over the Sobolev ellipsoid $\mathcal{E}(s,C)$,
+the critical radius is $r_\varepsilon^* \asymp \varepsilon^{4s/(4s+1)}$, which is strictly larger than
+the classical parametric rate $\varepsilon$ for any finite smoothness $s < \infty$. The exponent
+$4s/(4s+1)$ is decreasing in $s$: rougher signals (small $s$) are harder to detect and require
+a larger separation. This rate is established in \citet{Ing2012}.
+\end{remark}
 \subsection{Minimax properties of \texorpdfstring{$\chi^2$}{chi-square} type tests}
 Now, return to the Gaussian model in the space of sequences $\l^2$, and condiser the following hypothesis problem : 
 \begin{equation*}
