@@ -1,8 +1,8 @@
 \section{Setting of the problem}
 
 In this chapter, we study an ML-inspired approach to goodness-of-fit testing known as
-\textbf{Classifier-Accuracy Testing} (CAT), first explicitly described by Friedman \cite{friedmanCAT}
-and later studied in a rigorous minimax framework by Gerber et al.\ \cite{gerberclas}. The central
+\textbf{Classifier-Accuracy Testing} (CAT), first explicitly described by \cite{friedmanCAT}
+and later studied in a rigorous minimax framework by \cite{gerberclas}. The central
 idea is to reduce a distributional testing problem to a classification problem: one trains a binary
 classifier on synthetic labeled samples, then uses its predictions on the actual data as a test
 statistic.
@@ -48,7 +48,7 @@ The main result of this chapter is the following lower bound on the sample compl
 Consider the goodness-of-fit problem $H_0 : P_X = P_0$ versus $H_1 : \mathrm{TV}(P_X,P_0)
 \geq \varepsilon$ with $P_0 \in \mathcal{P}_G(s, C)$. Then the minimax sample complexity satisfies:
 \[
-    n(\varepsilon, \delta, s)
+    n(\epsilon,\delta,\mathcal{P}_G(s,C_G))= n(\varepsilon, \delta, s)
     \;\gtrsim\;
     \frac{\sqrt{\log(1/\delta)}}{\varepsilon^{\frac{4s+1}{2s}}}
     + \frac{\log(1/\delta)}{\varepsilon^{2}}.
@@ -60,7 +60,7 @@ the second is a universal information-theoretic floor for binary testing at conf
 The proof is developed in the following sections.
 
 \section{Preliminary results } 
-The hard part of this kind of frameworks consists in finiding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
+The main difficulty of this kind of frameworks consists in finding a good separating set $S \subset \mx$, but we firstly need to define what "good" means. 
 \begin{definition}
     Let $S \subseteq \mx$ be a measurable set, and $\mu,\nu$ be two probability measures on $\mx$. We define the separation and size of $S$ respectively as follows : 
     \begin{equation*}
@@ -79,7 +79,7 @@ The hard part of this kind of frameworks consists in finiding a good separating 
     for a large enough constant $c >0$
 \end{lemma}
 \begin{remark}
-With \Cref{lem:lemma1}, one can imagine that a separating can be referred to as "good" if $\left|\sep(S)\right|$ is large under $H_1$, and $\tau(S)$ is small under both $H_0$ and $\H_1$ with probability $1-\delta$
+With \Cref{lem:lemma1}, one can imagine that a separating set can be referred to as "good" if $\left|\sep(S)\right|$ is large under $H_1$, and $\tau(S)$ is small under both $H_0$ and $\H_1$ with probability $1-\delta$
 \end{remark}
 In order to prove \cref{lem:lemma1}, we will need a prior result on the Bernstein concentration of the classifier accuracy statistics. 
 \begin{lemma}\label{lem:lemma2} \citet[Lemma~8]{gerberclas}\\
@@ -96,7 +96,7 @@ Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,
     \begin{equation*}
         \Bigg| \frac{1}{n} \sum_{i=1}^{n} \ind{X_i \in S}-\ind{Y_i \in S} \Bigg| \leq \sqrt{\frac{c\bar{\tau}\log(1/\delta)}{n}} + \frac{c\log(1/\delta)}{n}
     \end{equation*}
-    and reject the null hypothesis otherwise. Above, $c>0$ is a large absolut constant, and note that the threshold only relies on the knowledge of $\bar{\tau},n$ and $\delta$\\
+    and reject the null hypothesis otherwise. Above, $c>0$ is a large absolute constant, and note that the threshold only relies on the knowledge of $\bar{\tau},n$ and $\delta$\\
     To analyse type-I and type-II errors , first, assume that $\H_0$ holds. Since $\sep(S) = 0$ under the latter hypothesis, the second statement of \Cref{lem:lemma2} implies that we accept $\H_0$ with probability at least $1-\frac{\delta}{2}$ if $c$ is large enough.
     Moreover, if $\H_1$ holds, with probability at least $1-\frac{\delta}{2}$, the first statement of \Cref{lem:lemma2} implies that : 
     \begin{equation*}
@@ -105,7 +105,7 @@ Suppose $A_1,A_2,\dots,A_n \overset{iid}{\sim}\text{Ber}(p)$ and $B_1,B_2,\dots,
      By the assumed lower bound $n \geq c\frac{\log(\frac{1}{\delta})}{\underbar{$\sep$}}\Bigl(1+ \frac{\bar{\tau}}{\underbar{$\sep$}}\Bigr)$, we will reject $\H_0$ as desired.
 \end{proof}
 \begin{prop}\label{prop1}\citet[Prop~1]{gerberclas}
-    Let $\P$ and $\Q$ be two probablity measures on a probability space $\mx$, and let $\mc$ be a possibly randomized classifier. Then the following inequality is true : 
+    Let $\P$ and $\Q$ be two probability measures on a probability space $\mx$, and let $\mc$ be a possibly randomized classifier. Then the following inequality is true : 
     \begin{equation*}
         TV(\P,\Q) \leq 2\sup \bigl\{\P(\mc(X) =0) -\Q(\mc(X)=0) \text{ over } X \ \text{satisfying} \ \P(\mc(X)=0) = \Q(\mc(X)=1) \bigr\}
     \end{equation*}
@@ -157,7 +157,7 @@ In order to prove \Cref{prop1} we will need the following lemma :
 
 
 \section{Performance of the CAT test in the Gaussian case}
-Suppose one have two samples $X,Y$ of size $n\in \N$ from $\mu_{\theta^X} \coloneqq \bigotimes_{j=1}^\infty \mathcal{N}(\theta_j^X,1)$ and $\mut{\theta^Y}$, respectively and such that $\mu^X,\mu^Y$ have bounded Sobolev norm. 
+Suppose one has two samples $X,Y$ of size $n\in \N$ from $\mu_{\theta^X} \coloneqq \bigotimes_{j=1}^\infty \mathcal{N}(\theta_j^X,1)$ and $\mut{\theta^Y}$, respectively and such that $\mu^X,\mu^Y$ have bounded Sobolev norm. 
 Moreover, assume that $TV(\mut{\theta^X},\mut{\theta^Y}) \geq \epsilon >0$, and let $\hat{\theta}^X, \hat{\theta}^Y$ denote the empirical means from the two samples respectively.
 Define the following statistic : 
 \begin{equation}\label{statseparating}
@@ -168,7 +168,7 @@ for some $J\in \N$ to be specified. We construct the separating set as follows :
 \end{equation}
 The performance of this construction of separating set is summarized in the statement of the following result : 
 \begin{prop}\citet{gerberclas}\label{CATperf}
-    There exists universal constants $c,c'$ such that for $J = \big\lfloor c\epsilon^{-\frac{1}{s}}\big\rfloor$ the following inequality holds provided $n \gtrsim \frac{1}{c'}n(\epsilon,\delta)$ : 
+    There exists universal constants $c,c'$ such that for $J = \big\lfloor c\epsilon^{-\frac{1}{s}}\big\rfloor$ the following inequality holds provided $n \gtrsim \frac{1}{c'}n(\epsilon,\delta,s)$ : 
     \begin{equation}\label{ineqperf}
         \P\Bigg( \mut{\theta^X}(\hat{S}) - \mut{\theta^Y}(\hat{S}) \geq c'\cdot \min\Big(\sqrt{n\epsilon^{\frac{1}{s}}},\frac{1}{\epsilon}\Big)\cdot \epsilon^2 \Bigg) \geq 1 -\delta
     \end{equation}
@@ -220,9 +220,9 @@ In order to prove this proposition, we will need few lemmas and prior results.
             &- \phi\Bigl(-\frac{1}{2}\bigscal{V}{\frac{U}{\norm{U}}} + \bigscal{\theta^Y}{\frac{U}{\norm{U}}} \Bigr) \Bigg)}
         \end{aligned}\\
         & \leq \frac{1}{\sqrt{8\pi e}} \Big|\bigscal{\theta^X-\theta^Y}{\frac{U}{\norm{U}}} \Big| \\ 
-        & \leq \frac{C}{\sqrt{8 \pi e}}
+        & \leq \frac{C_G}{\sqrt{8 \pi e}}
     \end{align*}
-    By Lipschitz concentration of Gaussian random variable (\Cref{LipschitzConc}), one can conclude that $g - \E[g|U]$ is sub-Gaussian with variance proxy $\frac{C^2}{4\pi en}$. Now, we study the concentration of $\E[g|U]$. First, note that : \begin{equation*}
+    By Lipschitz concentration of Gaussian random variable (\Cref{LipschitzConc}), one can conclude that $g - \E[g|U]$ is sub-Gaussian with variance proxy $\frac{C_G^2}{4\pi en}$. Now, we study the concentration of $\E[g|U]$. First, note that : \begin{equation*}
         -\frac{1}{2} \bigscal{V}{\frac{U}{\norm{U}}} + \bigscal{\theta}{\frac{U}{\norm{U}}} \Bigg| U \sim \mathcal{N}\Biggl(\bigscal{\theta-\frac{1}{2}(\theta^X+\theta^Y)}{\frac{U}{\norm{U}}},\frac{1}{2n} \Biggr)
     \end{equation*}
     Then, using the independence of $U,V$ and \cref{gaussianexpec}, we obtain : \begin{align*}
@@ -309,7 +309,7 @@ which, combined with \Cref{omega}, completes the proof.
     \begin{equation*}
         M \asymp \Bigl(\sqrt{n}\epsilon^{\frac{1}{s}}\wedge \frac{1}{\epsilon}\Bigr)\epsilon^2
     \end{equation*}
-    Also, the second term in \Cref{ineqsep} is of order $\sqrt{\frac{\log(1/\delta)}{n}}$, under the condition $n \gtrsim \frac{1}{c'}n(\epsilon,\delta,\mathcal{P}_G(s,C_G))$ (where $c' = \frac{c_3}{2}$ after absorbing all universal constants), 
+    Also, the second term in \Cref{ineqsep} is of order $\sqrt{\frac{\log(1/\delta)}{n}}$, under the condition $n \gtrsim \frac{1}{c'}n(\epsilon,\delta,s)$ (where $c' = \frac{c_3}{2}$ after absorbing all universal constants), 
     this term is at most $\frac{M}{2}$. Therefore, with probability at least $1-\delta$ : 
     \begin{equation*}
         \sep(\hat{S}) \geq \frac{M}{2} \asymp \Bigl(\sqrt{n}\epsilon^{\frac{1}{s}}\wedge \frac{1}{\epsilon}\Bigr)\epsilon^2
@@ -352,7 +352,7 @@ Where $\E P$ denotes the mixture of $P$. Also, note that deriving a lower bound 
 Now that we have all the necessary tools, we will prove the main theorem of this chapter. We will split this proof into many parts : 
 \begin{prop}\label{param}\cite{gerberclas}
     There exists a constant $K_0$ such that for every $\epsilon$ small enough, \begin{equation}\label{parameq}
-        n(\epsilon,\delta,\mathcal{P}_G(s,C_G)) \geq K_0 \frac{log(1/\delta)}{\epsilon^2}
+        n(\epsilon,\delta,s) \geq K_0 \frac{log(1/\delta)}{\epsilon^2}
     \end{equation}
 \end{prop}
 \begin{proof}[Proof of \Cref{param}] 
@@ -409,7 +409,7 @@ Now that we have all the necessary tools, we will prove the main theorem of this
 \begin{proof}[Proof of \Cref{klmixture}]
     See \hyperref[appendix]{Appendix}
 \end{proof}
-By combining \Cref{mixture} and \Cref{klmixture}, we obtain : 
+By combining \Cref{mixture} and \Cref{klmixture} and using the independence of the components, we obtain : 
 \begin{equation*}
     KL(\P_0^{\otimes n}\Vert \E\P_\eta^{\otimes n}) \leq J\cdot \frac{n^2\omega^4}{4} = \frac{n^2}{4}\cdot J\omega^2 \cdot \omega^2
 \end{equation*}
